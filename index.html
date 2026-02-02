@@ -3,68 +3,362 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>JLJM Timeless Cup</title>
+    <title>JLJM Timeless Cup | Premium Coffee Experience</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;600;700&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <header>
-      <h1 class="logo-animated">JLJM Timeless Cup</h1>
-      <nav>
-        <ul>
-          <li><a href="#home" class="nav-link">Home</a></li>
-          <li><a href="dashboard.html" class="nav-link">Dashboard</a></li>
-          <li><a href="#" class="nav-link cart-link" id="cartBtn">🛒 Cart (<span id="cartCount">0</span>)</a></li>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+      <div class="nav-container">
+        <div class="nav-logo">
+          <span class="logo-icon">☕</span>
+          <span class="logo-text">JLJM Timeless Cup</span>
+        </div>
+        <ul class="nav-menu" id="navMenu">
+          <li><a href="#home" class="nav-link active">Home</a></li>
+          <li><a href="#about" class="nav-link">About</a></li>
+          <li><a href="#menu" class="nav-link">Menu</a></li>
+          <li>
+            <a href="#" class="nav-link cart-btn" id="cartBtn">
+              <span class="cart-icon">🛒</span>
+              <span class="cart-count" id="cartCount">0</span>
+            </a>
+          </li>
         </ul>
-      </nav>
-    </header>
-    
+        <div class="hamburger" id="hamburger">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
     <section id="home" class="hero">
+      <div class="hero-overlay"></div>
       <div class="hero-content">
-        <h2 class="hero-title">Timeless Cup</h2>
-        <p class="hero-subtitle">Where every sip tells a timeless story.</p>
-        <a href="dashboard.html"
-          ><button class="cta-button">View Menu</button></a
-        >
+        <div class="hero-text fade-in-up">
+          <h1 class="hero-title">
+            Where Every Sip<br />
+            <span class="highlight">Tells a Timeless Story</span>
+          </h1>
+          <p class="hero-subtitle">
+            Experience the perfect blend of premium beans, artisan
+            craftsmanship, and timeless moments in every cup.
+          </p>
+          <div class="hero-buttons">
+            <a href="dashboard.html" class="btn btn-primary">Order Now</a>
+            <a href="#menu" class="btn btn-secondary">View Menu</a>
+          </div>
+        </div>
+      </div>
+      <div class="scroll-indicator">
+        <span>Scroll to explore</span>
+        <div class="scroll-arrow">↓</div>
       </div>
     </section>
-    
-    <section class="about-section">
-      <div class="about-content">
-        <h2 class="section-title">About Us</h2>
-        <p class="about-text">
-          JLJM Timeless Cup blends premium beans, slow brewing, and cozy
-          ambiance — crafted for moments that matter.
-        </p>
-      </div>
-      <div class="features">
-        <div class="feature-card">
-          <div class="feature-icon">☕</div>
-          <h3>Premium Beans</h3>
-          <p>Sourced from the finest coffee regions</p>
+
+    <!-- About Section -->
+    <section id="about" class="about-section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-badge">Our Story</span>
+          <h2 class="section-title">Crafted with Passion</h2>
+          <p class="section-subtitle">
+            JLJM Timeless Cup is more than just a coffee shop — it's a
+            destination for those who appreciate the art of coffee.
+          </p>
         </div>
-        <div class="feature-card">
-          <div class="feature-icon">🕐</div>
-          <h3>Slow Brewing</h3>
-          <p>Crafted with care and precision</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">🏠</div>
-          <h3>Cozy Ambiance</h3>
-          <p>Your perfect escape spot</p>
+
+        <div class="about-grid">
+          <div class="about-card card-animate">
+            <div class="about-card-icon">
+              <svg width="60" height="60" viewBox="0 0 60 60" fill="none">
+                <circle
+                  cx="30"
+                  cy="30"
+                  r="28"
+                  stroke="currentColor"
+                  stroke-width="2"
+                />
+                <path
+                  d="M30 15 L30 30 L40 35"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                />
+              </svg>
+            </div>
+            <h3>Slow Crafted</h3>
+            <p>
+              Every cup is meticulously prepared using time-honored techniques
+              and modern precision.
+            </p>
+          </div>
+
+          <div class="about-card card-animate" style="animation-delay: 0.2s">
+            <div class="about-card-icon">
+              <svg width="60" height="60" viewBox="0 0 60 60" fill="none">
+                <path
+                  d="M15 35 Q30 20 45 35"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  fill="none"
+                />
+                <path
+                  d="M20 40 Q30 30 40 40"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  fill="none"
+                />
+                <circle cx="30" cy="25" r="3" fill="currentColor" />
+              </svg>
+            </div>
+            <h3>Premium Beans</h3>
+            <p>
+              Sourced from the world's finest coffee-growing regions, ensuring
+              exceptional quality.
+            </p>
+          </div>
+
+          <div class="about-card card-animate" style="animation-delay: 0.4s">
+            <div class="about-card-icon">
+              <svg width="60" height="60" viewBox="0 0 60 60" fill="none">
+                <rect
+                  x="15"
+                  y="20"
+                  width="30"
+                  height="25"
+                  rx="2"
+                  stroke="currentColor"
+                  stroke-width="2"
+                />
+                <path
+                  d="M20 20 L20 15 L40 15 L40 20"
+                  stroke="currentColor"
+                  stroke-width="2"
+                />
+                <circle cx="30" cy="32" r="5" fill="currentColor" />
+              </svg>
+            </div>
+            <h3>Cozy Atmosphere</h3>
+            <p>
+              A warm, inviting space designed for connection, relaxation, and
+              inspiration.
+            </p>
+          </div>
         </div>
       </div>
     </section>
-    
-    <footer>
-      <p>Group: Jan Escario, Leo Dimata, Jeric Diringan, Mark Conogana</p>
-      <p>© 01/26/2026 JLJM Timeless Cup. All Rights Reserved.</p>
+
+    <!-- Menu Preview Section -->
+    <section id="menu" class="menu-section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-badge">Our Selection</span>
+          <h2 class="section-title">Menu Dashboard</h2>
+          <p class="section-subtitle">
+            Explore our carefully curated selection of coffee and pastries
+          </p>
+        </div>
+
+        <div class="menu-grid">
+          <div class="menu-card">
+            <div class="menu-card-image">
+              <img
+                src="https://images.unsplash.com/photo-1686315715890-9083c5c5c861?q=80&w=685&auto=format&fit=crop"
+                alt="Cappuccino"
+              />
+              <div class="menu-card-overlay">
+                <a href="dashboard.html" class="btn btn-small">Order Now</a>
+              </div>
+            </div>
+            <div class="menu-card-content">
+              <h3>Cappuccino</h3>
+              <p>Rich espresso with velvety milk foam</p>
+              <div class="menu-card-footer">
+                <span class="price">₱150</span>
+                <span class="tag">Hot</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="menu-card">
+            <div class="menu-card-image">
+              <img
+                src="https://images.unsplash.com/photo-1510591509098-f4fdc6d0ff04?q=80&w=687&auto=format&fit=crop"
+                alt="Espresso"
+              />
+              <div class="menu-card-overlay">
+                <a href="dashboard.html" class="btn btn-small">Order Now</a>
+              </div>
+            </div>
+            <div class="menu-card-content">
+              <h3>Espresso</h3>
+              <p>Bold and intense coffee shot</p>
+              <div class="menu-card-footer">
+                <span class="price">₱120</span>
+                <span class="tag">Hot</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="menu-card">
+            <div class="menu-card-image">
+              <img
+                src="https://plus.unsplash.com/premium_photo-1671718611934-06f5c1a523c2?q=80&w=687&auto=format&fit=crop"
+                alt="Latte"
+              />
+              <div class="menu-card-overlay">
+                <a href="dashboard.html" class="btn btn-small">Order Now</a>
+              </div>
+            </div>
+            <div class="menu-card-content">
+              <h3>Latte</h3>
+              <p>Smooth and creamy milk coffee</p>
+              <div class="menu-card-footer">
+                <span class="price">₱170</span>
+                <span class="tag">Hot/Cold</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="menu-card">
+            <div class="menu-card-image">
+              <img
+                src="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?q=80&w=687&auto=format&fit=crop"
+                alt="Americano"
+              />
+              <div class="menu-card-overlay">
+                <a href="dashboard.html" class="btn btn-small">Order Now</a>
+              </div>
+            </div>
+            <div class="menu-card-content">
+              <h3>Americano</h3>
+              <p>Bold espresso with hot water</p>
+              <div class="menu-card-footer">
+                <span class="price">₱140</span>
+                <span class="tag">Hot/Cold</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="menu-cta">
+          <a href="dashboard.html" class="btn btn-primary">View Full Menu</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section class="experience-section">
+      <div class="experience-grid">
+        <div class="experience-image">
+          <img
+            src="https://png.pngtree.com/background/20230528/original/pngtree-coffees-and-shots-of-coffees-on-a-table-picture-image_2783645.jpg"
+            alt="Coffee Experience"
+          />
+        </div>
+        <div class="experience-content">
+          <span class="section-badge">The JLJM Experience</span>
+          <h2 class="section-title">More Than Just Coffee</h2>
+          <p>
+            At JLJM Timeless Cup, we believe that coffee is an art form. Every
+            bean is carefully selected, every brew is precisely timed, and every
+            cup is served with care.
+          </p>
+          <p>
+            Our baristas are passionate craftspeople who take pride in creating
+            the perfect cup for you. Whether you're starting your day, taking a
+            break, or catching up with friends, we're here to make your moment
+            special.
+          </p>
+          <div class="experience-stats">
+            <div class="stat-item">
+              <h3>100%</h3>
+              <p>Premium Beans</p>
+            </div>
+            <div class="stat-item">
+              <h3>5★</h3>
+              <p>Customer Rated</p>
+            </div>
+            <div class="stat-item">
+              <h3>2026</h3>
+              <p>Est. Founded</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-grid">
+          <div class="footer-col">
+            <div class="footer-logo">
+              <span class="logo-icon">☕</span>
+              <span class="logo-text">JLJM Timeless Cup</span>
+            </div>
+            <p>Where every sip tells a timeless story.</p>
+          </div>
+          <div class="footer-col">
+            <h4>Quick Links</h4>
+            <ul>
+              <li><a href="#home">Home</a></li>
+              <li><a href="#about">About</a></li>
+              <li><a href="#menu">Menu</a></li>
+              <li><a href="dashboard.html">Order Now</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>Contact Us</h4>
+            <ul>
+              <li>escxrio@gmail.com</li>
+              <li>+63 967 408 1628</li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>Visit Us</h4>
+            <ul>
+              <li>Location: Las Piñas City, Philippines</li>
+              <h4>Hours</h4>
+              <li>Mon - Fri: 7am - 10pm</li>
+              <li>Sat - Sun: 8am - 8pm</li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>Group: Jan Escario, Leo Dimata, Jeric Diringan, Mark Conogana</p>
+          <p>© 01/26/2026 JLJM Timeless Cup. All Rights Reserved.</p>
+        </div>
+      </div>
     </footer>
-    
+
+    <!-- Cart Modal -->
+    <div id="cartModal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Your Cart</h2>
+        <div id="cartItems"></div>
+        <div class="cart-summary">
+          <div class="summary-row total-row">
+            <span>Total:</span>
+            <span>₱<span id="totalAmount">0</span></span>
+          </div>
+        </div>
+        <button class="btn btn-primary btn-full" id="checkoutBtn">
+          Proceed to Checkout
+        </button>
+      </div>
+    </div>
+
     <script src="main.js"></script>
   </body>
 </html>
