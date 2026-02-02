@@ -1,11 +1,11 @@
 :root {
-  /* New Cold Coffee Color Scheme */
-  --canvas: #FEF8D0;
-  --latte: #E3AC6D;
-  --mocha: #DAC09F;
-  --brew: #BA6324;
-  --espresso: #BD3F70;
-  --roast: #AF6E4B;
+  /* Warm Coffee Color Scheme */
+  --canvas: #F5EBE0;
+  --latte: #D4A574;
+  --mocha: #C9A66B;
+  --brew: #B8935A;
+  --espresso: #A67C52;
+  --roast: #8B6F47;
 }
 
 * {
