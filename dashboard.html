@@ -3,208 +3,337 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>JLJM Timeless Cup | Dashboard</title>
-
+    <title>Order Now | JLJM Timeless Cup</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;600;700&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="styles.css" />
   </head>
 
-  <body>
-    <header>
-      <h1 class="logo-animated">JLJM Timeless Cup</h1>
-      <nav>
-        <ul>
-          <li><a href="index.html" class="nav-link">Home</a></li>
-          <li><a href="dashboard.html" class="nav-link">Dashboard</a></li>
-          <li><a href="#" class="nav-link cart-link" id="cartBtn">🛒 Cart (<span id="cartCount">0</span>)</a></li>
-        </ul>
-      </nav>
-    </header>
-
-    <main class="dashboard-main">
-      <section class="dashboard-header">
-        <h2>Menu Dashboard</h2>
-        <p>Coffee & Pastries Overview</p>
-      </section>
-
-      <section class="dashboard-content">
-        <div class="table-container">
-          <table>
-            <thead>
-              <tr>
-                <th>Item</th>
-                <th>Hot / Cold</th>
-                <th>Description</th>
-                <th>Price</th>
-                <th>Image</th>
-                <th>Add to Cart</th>
-              </tr>
-            </thead>
-
-            <tbody>
-              <tr class="category">
-                <td colspan="6">☕ Coffee</td>
-              </tr>
-
-              <tr data-item="Cappuccino" data-price="150">
-                <td>Cappuccino</td>
-                <td>Hot</td>
-                <td>Espresso with milk foam.</td>
-                <td>₱150</td>
-                <td>
-                  <img
-                    src="https://images.unsplash.com/photo-1686315715890-9083c5c5c861?q=80&w=685&auto=format&fit=crop"
-                    width="80"
-                    alt="Cappuccino"
-                  />
-                </td>
-                <td>
-                  <div class="quantity-controls">
-                    <button class="qty-btn minus">-</button>
-                    <input type="number" class="qty-input" value="0" min="0" readonly>
-                    <button class="qty-btn plus">+</button>
-                  </div>
-                </td>
-              </tr>
-
-              <tr data-item="Latte" data-price="170">
-                <td>Latte</td>
-                <td>Hot / Cold</td>
-                <td>Smooth milk coffee.</td>
-                <td>₱170</td>
-                <td>
-                  <img
-                    src="https://plus.unsplash.com/premium_photo-1671718611934-06f5c1a523c2?q=80&w=687&auto=format&fit=crop"
-                    width="80"
-                    alt="Latte"
-                  />
-                </td>
-                <td>
-                  <div class="quantity-controls">
-                    <button class="qty-btn minus">-</button>
-                    <input type="number" class="qty-input" value="0" min="0" readonly>
-                    <button class="qty-btn plus">+</button>
-                  </div>
-                </td>
-              </tr>
-
-              <tr data-item="Americano" data-price="140">
-                <td>Americano</td>
-                <td>Hot / Cold</td>
-                <td>Bold espresso diluted with hot water.</td>
-                <td>₱140</td>
-                <td>
-                  <img
-                    src="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?q=80&w=687&auto=format&fit=crop"
-                    width="80"
-                    alt="Americano"
-                  />
-                </td>
-                <td>
-                  <div class="quantity-controls">
-                    <button class="qty-btn minus">-</button>
-                    <input type="number" class="qty-input" value="0" min="0" readonly>
-                    <button class="qty-btn plus">+</button>
-                  </div>
-                </td>
-              </tr>
-
-              <tr data-item="Mocha" data-price="180">
-                <td>Mocha</td>
-                <td>Hot / Cold</td>
-                <td>Espresso with chocolate and steamed milk.</td>
-                <td>₱180</td>
-                <td>
-                  <img
-                    src="https://images.unsplash.com/photo-1607260550778-aa9d29444ce1?q=80&w=687&auto=format&fit=crop"
-                    width="80"
-                    alt="Mocha"
-                  />
-                </td>
-                <td>
-                  <div class="quantity-controls">
-                    <button class="qty-btn minus">-</button>
-                    <input type="number" class="qty-input" value="0" min="0" readonly>
-                    <button class="qty-btn plus">+</button>
-                  </div>
-                </td>
-              </tr>
-
-              <tr class="category">
-                <td colspan="6">🥐 Pastries – Cookies</td>
-              </tr>
-
-              <tr data-item="Chocolate Chip Cookie" data-price="80">
-                <td>Chocolate Chip Cookie</td>
-                <td>-</td>
-                <td>Fresh baked cookie.</td>
-                <td>₱80</td>
-                <td>
-                  <img
-                    src="https://plus.unsplash.com/premium_photo-1668164007727-9f8fc97df4f6?q=80&w=687&auto=format&fit=crop"
-                    width="80"
-                    alt="Cookie"
-                  />
-                </td>
-                <td>
-                  <div class="quantity-controls">
-                    <button class="qty-btn minus">-</button>
-                    <input type="number" class="qty-input" value="0" min="0" readonly>
-                    <button class="qty-btn plus">+</button>
-                  </div>
-                </td>
-              </tr>
-
-              <tr data-item="Croissant" data-price="95">
-                <td>Croissant</td>
-                <td>-</td>
-                <td>Buttery, flaky pastry.</td>
-                <td>₱95</td>
-                <td>
-                  <img
-                    src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?q=80&w=687&auto=format&fit=crop"
-                    width="80"
-                    alt="Croissant"
-                  />
-                </td>
-                <td>
-                  <div class="quantity-controls">
-                    <button class="qty-btn minus">-</button>
-                    <input type="number" class="qty-input" value="0" min="0" readonly>
-                    <button class="qty-btn plus">+</button>
-                  </div>
-                </td>
-              </tr>
-
-              <tr data-item="Blueberry Muffin" data-price="110">
-                <td>Blueberry Muffin</td>
-                <td>-</td>
-                <td>Soft muffin with fresh blueberries.</td>
-                <td>₱110</td>
-                <td>
-                  <img
-                    src="https://images.unsplash.com/photo-1607958996333-41aef7caefaa?q=80&w=687&auto=format&fit=crop"
-                    width="80"
-                    alt="Muffin"
-                  />
-                </td>
-                <td>
-                  <div class="quantity-controls">
-                    <button class="qty-btn minus">-</button>
-                    <input type="number" class="qty-input" value="0" min="0" readonly>
-                    <button class="qty-btn plus">+</button>
-                  </div>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+  <body class="dashboard-body">
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+      <div class="nav-container">
+        <div class="nav-logo">
+          <span class="logo-icon">☕</span>
+          <span class="logo-text">JLJM Timeless Cup</span>
         </div>
-      </section>
-    </main>
+        <ul class="nav-menu" id="navMenu">
+          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li><a href="index.html#about" class="nav-link">About</a></li>
+          <li><a href="index.html#menu" class="nav-link">Menu</a></li>
+          <li>
+            <a href="#" class="nav-link cart-btn" id="cartBtn">
+              <span class="cart-icon">🛒</span>
+              <span class="cart-count" id="cartCount">0</span>
+            </a>
+          </li>
+        </ul>
+        <div class="hamburger" id="hamburger">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Dashboard Header -->
+    <section class="dashboard-hero">
+      <div class="container">
+        <div class="dashboard-hero-content">
+          <h1 class="page-title">Order Your Favorites</h1>
+          <p class="page-subtitle">
+            Customize your perfect cup and have it ready when you are
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Menu Categories -->
+    <section class="dashboard-menu">
+      <div class="container">
+        <div class="category-filter">
+          <button class="filter-btn active" data-category="all">
+            All Items
+          </button>
+          <button class="filter-btn" data-category="coffee">Coffee</button>
+          <button class="filter-btn" data-category="pastries">Pastries</button>
+        </div>
+
+        <div class="products-grid">
+          <!-- Coffee Items -->
+          <div
+            class="product-card"
+            data-category="coffee"
+            data-item="Cappuccino"
+            data-price="150"
+            data-options="hot"
+          >
+            <div class="product-image">
+              <img
+                src="https://images.unsplash.com/photo-1686315715890-9083c5c5c861?q=80&w=685&auto=format&fit=crop"
+                alt="Cappuccino"
+              />
+              <span class="product-badge">Hot</span>
+            </div>
+            <div class="product-content">
+              <h3 class="product-name">Cappuccino</h3>
+              <p class="product-description">
+                Rich espresso with velvety milk foam
+              </p>
+              <div class="product-footer">
+                <span class="product-price">₱150</span>
+                <div class="quantity-controls">
+                  <button class="qty-btn minus">−</button>
+                  <input
+                    type="number"
+                    class="qty-input"
+                    value="0"
+                    min="0"
+                    readonly
+                  />
+                  <button class="qty-btn plus">+</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="product-card"
+            data-category="coffee"
+            data-item="Espresso"
+            data-price="120"
+            data-options="hot"
+          >
+            <div class="product-image">
+              <img
+                src="https://images.unsplash.com/photo-1510591509098-f4fdc6d0ff04?q=80&w=687&auto=format&fit=crop"
+                alt="Espresso"
+              />
+              <span class="product-badge">Hot</span>
+            </div>
+            <div class="product-content">
+              <h3 class="product-name">Espresso</h3>
+              <p class="product-description">Bold and intense coffee shot</p>
+              <div class="product-footer">
+                <span class="product-price">₱120</span>
+                <div class="quantity-controls">
+                  <button class="qty-btn minus">−</button>
+                  <input
+                    type="number"
+                    class="qty-input"
+                    value="0"
+                    min="0"
+                    readonly
+                  />
+                  <button class="qty-btn plus">+</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="product-card"
+            data-category="coffee"
+            data-item="Latte"
+            data-price="170"
+            data-options="hot,cold"
+          >
+            <div class="product-image">
+              <img
+                src="https://plus.unsplash.com/premium_photo-1671718611934-06f5c1a523c2?q=80&w=687&auto=format&fit=crop"
+                alt="Latte"
+              />
+              <span class="product-badge">Hot/Cold</span>
+            </div>
+            <div class="product-content">
+              <h3 class="product-name">Latte</h3>
+              <p class="product-description">Smooth and creamy milk coffee</p>
+              <div class="temperature-options">
+                <label class="temp-option">
+                  <input type="radio" name="latte-temp" value="hot" checked />
+                  <span>Hot</span>
+                </label>
+                <label class="temp-option">
+                  <input type="radio" name="latte-temp" value="cold" />
+                  <span>Cold</span>
+                </label>
+              </div>
+              <div class="product-footer">
+                <span class="product-price">₱170</span>
+                <div class="quantity-controls">
+                  <button class="qty-btn minus">−</button>
+                  <input
+                    type="number"
+                    class="qty-input"
+                    value="0"
+                    min="0"
+                    readonly
+                  />
+                  <button class="qty-btn plus">+</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="product-card"
+            data-category="coffee"
+            data-item="Americano"
+            data-price="140"
+            data-options="hot,cold"
+          >
+            <div class="product-image">
+              <img
+                src="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?q=80&w=687&auto=format&fit=crop"
+                alt="Americano"
+              />
+              <span class="product-badge">Hot/Cold</span>
+            </div>
+            <div class="product-content">
+              <h3 class="product-name">Americano</h3>
+              <p class="product-description">Bold espresso with hot water</p>
+              <div class="temperature-options">
+                <label class="temp-option">
+                  <input
+                    type="radio"
+                    name="americano-temp"
+                    value="hot"
+                    checked
+                  />
+                  <span>Hot</span>
+                </label>
+                <label class="temp-option">
+                  <input type="radio" name="americano-temp" value="cold" />
+                  <span>Cold</span>
+                </label>
+              </div>
+              <div class="product-footer">
+                <span class="product-price">₱140</span>
+                <div class="quantity-controls">
+                  <button class="qty-btn minus">−</button>
+                  <input
+                    type="number"
+                    class="qty-input"
+                    value="0"
+                    min="0"
+                    readonly
+                  />
+                  <button class="qty-btn plus">+</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Pastry Items -->
+          <div
+            class="product-card"
+            data-category="pastries"
+            data-item="Chocolate Chip Cookie"
+            data-price="80"
+          >
+            <div class="product-image">
+              <img
+                src="https://plus.unsplash.com/premium_photo-1668164007727-9f8fc97df4f6?q=80&w=687&auto=format&fit=crop"
+                alt="Chocolate Chip Cookie"
+              />
+              <span class="product-badge">Fresh Baked</span>
+            </div>
+            <div class="product-content">
+              <h3 class="product-name">Chocolate Chip Cookie</h3>
+              <p class="product-description">
+                Fresh baked cookie with chocolate chips
+              </p>
+              <div class="product-footer">
+                <span class="product-price">₱80</span>
+                <div class="quantity-controls">
+                  <button class="qty-btn minus">−</button>
+                  <input
+                    type="number"
+                    class="qty-input"
+                    value="0"
+                    min="0"
+                    readonly
+                  />
+                  <button class="qty-btn plus">+</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="product-card"
+            data-category="pastries"
+            data-item="Croissant"
+            data-price="95"
+          >
+            <div class="product-image">
+              <img
+                src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?q=80&w=687&auto=format&fit=crop"
+                alt="Croissant"
+              />
+              <span class="product-badge">Buttery</span>
+            </div>
+            <div class="product-content">
+              <h3 class="product-name">Croissant</h3>
+              <p class="product-description">Buttery, flaky French pastry</p>
+              <div class="product-footer">
+                <span class="product-price">₱95</span>
+                <div class="quantity-controls">
+                  <button class="qty-btn minus">−</button>
+                  <input
+                    type="number"
+                    class="qty-input"
+                    value="0"
+                    min="0"
+                    readonly
+                  />
+                  <button class="qty-btn plus">+</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="product-card"
+            data-category="pastries"
+            data-item="Blueberry Muffin"
+            data-price="110"
+          >
+            <div class="product-image">
+              <img
+                src="https://images.unsplash.com/photo-1607958996333-41aef7caefaa?q=80&w=687&auto=format&fit=crop"
+                alt="Blueberry Muffin"
+              />
+              <span class="product-badge">Fresh</span>
+            </div>
+            <div class="product-content">
+              <h3 class="product-name">Blueberry Muffin</h3>
+              <p class="product-description">
+                Soft muffin with fresh blueberries
+              </p>
+              <div class="product-footer">
+                <span class="product-price">₱110</span>
+                <div class="quantity-controls">
+                  <button class="qty-btn minus">−</button>
+                  <input
+                    type="number"
+                    class="qty-input"
+                    value="0"
+                    min="0"
+                    readonly
+                  />
+                  <button class="qty-btn plus">+</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
     <!-- Cart Modal -->
     <div id="cartModal" class="modal">
@@ -212,15 +341,26 @@
         <span class="close">&times;</span>
         <h2>Your Cart</h2>
         <div id="cartItems"></div>
-        <div class="cart-total">
-          <h3>Total Amount: ₱<span id="totalAmount">0</span></h3>
+        <div class="cart-summary">
+          <div class="summary-row total-row">
+            <span>Total:</span>
+            <span>₱<span id="totalAmount">0</span></span>
+          </div>
         </div>
-        <button class="checkout-btn" id="checkoutBtn">Checkout</button>
+        <button class="btn btn-primary btn-full" id="checkoutBtn">
+          Proceed to Checkout
+        </button>
       </div>
     </div>
 
-    <footer>
-      <p>© 01/26/2026 JLJM Timeless Cup — All Rights Reserved.</p>
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-bottom">
+          <p>Group: Jan Escario, Leo Dimata, Jeric Diringan, Mark Conogana</p>
+          <p>© 01/26/2026 JLJM Timeless Cup. All Rights Reserved.</p>
+        </div>
+      </div>
     </footer>
 
     <script src="main.js"></script>
