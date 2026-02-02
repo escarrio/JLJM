@@ -20,6 +20,7 @@
         <ul>
           <li><a href="index.html" class="nav-link">Home</a></li>
           <li><a href="dashboard.html" class="nav-link">Dashboard</a></li>
+          <li><a href="#" class="nav-link cart-link" id="cartBtn">🛒 Cart (<span id="cartCount">0</span>)</a></li>
         </ul>
       </nav>
     </header>
@@ -40,15 +41,16 @@
                 <th>Description</th>
                 <th>Price</th>
                 <th>Image</th>
+                <th>Add to Cart</th>
               </tr>
             </thead>
 
             <tbody>
               <tr class="category">
-                <td colspan="5">☕ Coffee</td>
+                <td colspan="6">☕ Coffee</td>
               </tr>
 
-              <tr>
+              <tr data-item="Cappuccino" data-price="150">
                 <td>Cappuccino</td>
                 <td>Hot</td>
                 <td>Espresso with milk foam.</td>
@@ -60,9 +62,16 @@
                     alt="Cappuccino"
                   />
                 </td>
+                <td>
+                  <div class="quantity-controls">
+                    <button class="qty-btn minus">-</button>
+                    <input type="number" class="qty-input" value="0" min="0" readonly>
+                    <button class="qty-btn plus">+</button>
+                  </div>
+                </td>
               </tr>
 
-              <tr>
+              <tr data-item="Latte" data-price="170">
                 <td>Latte</td>
                 <td>Hot / Cold</td>
                 <td>Smooth milk coffee.</td>
@@ -74,9 +83,16 @@
                     alt="Latte"
                   />
                 </td>
+                <td>
+                  <div class="quantity-controls">
+                    <button class="qty-btn minus">-</button>
+                    <input type="number" class="qty-input" value="0" min="0" readonly>
+                    <button class="qty-btn plus">+</button>
+                  </div>
+                </td>
               </tr>
 
-              <tr>
+              <tr data-item="Americano" data-price="140">
                 <td>Americano</td>
                 <td>Hot / Cold</td>
                 <td>Bold espresso diluted with hot water.</td>
@@ -88,9 +104,16 @@
                     alt="Americano"
                   />
                 </td>
+                <td>
+                  <div class="quantity-controls">
+                    <button class="qty-btn minus">-</button>
+                    <input type="number" class="qty-input" value="0" min="0" readonly>
+                    <button class="qty-btn plus">+</button>
+                  </div>
+                </td>
               </tr>
 
-              <tr>
+              <tr data-item="Mocha" data-price="180">
                 <td>Mocha</td>
                 <td>Hot / Cold</td>
                 <td>Espresso with chocolate and steamed milk.</td>
@@ -102,13 +125,20 @@
                     alt="Mocha"
                   />
                 </td>
+                <td>
+                  <div class="quantity-controls">
+                    <button class="qty-btn minus">-</button>
+                    <input type="number" class="qty-input" value="0" min="0" readonly>
+                    <button class="qty-btn plus">+</button>
+                  </div>
+                </td>
               </tr>
 
               <tr class="category">
-                <td colspan="5">🥐 Pastries – Cookies</td>
+                <td colspan="6">🥐 Pastries – Cookies</td>
               </tr>
 
-              <tr>
+              <tr data-item="Chocolate Chip Cookie" data-price="80">
                 <td>Chocolate Chip Cookie</td>
                 <td>-</td>
                 <td>Fresh baked cookie.</td>
@@ -120,9 +150,16 @@
                     alt="Cookie"
                   />
                 </td>
+                <td>
+                  <div class="quantity-controls">
+                    <button class="qty-btn minus">-</button>
+                    <input type="number" class="qty-input" value="0" min="0" readonly>
+                    <button class="qty-btn plus">+</button>
+                  </div>
+                </td>
               </tr>
 
-              <tr>
+              <tr data-item="Croissant" data-price="95">
                 <td>Croissant</td>
                 <td>-</td>
                 <td>Buttery, flaky pastry.</td>
@@ -134,9 +171,16 @@
                     alt="Croissant"
                   />
                 </td>
+                <td>
+                  <div class="quantity-controls">
+                    <button class="qty-btn minus">-</button>
+                    <input type="number" class="qty-input" value="0" min="0" readonly>
+                    <button class="qty-btn plus">+</button>
+                  </div>
+                </td>
               </tr>
 
-              <tr>
+              <tr data-item="Blueberry Muffin" data-price="110">
                 <td>Blueberry Muffin</td>
                 <td>-</td>
                 <td>Soft muffin with fresh blueberries.</td>
@@ -148,12 +192,32 @@
                     alt="Muffin"
                   />
                 </td>
+                <td>
+                  <div class="quantity-controls">
+                    <button class="qty-btn minus">-</button>
+                    <input type="number" class="qty-input" value="0" min="0" readonly>
+                    <button class="qty-btn plus">+</button>
+                  </div>
+                </td>
               </tr>
             </tbody>
           </table>
         </div>
       </section>
     </main>
+
+    <!-- Cart Modal -->
+    <div id="cartModal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Your Cart</h2>
+        <div id="cartItems"></div>
+        <div class="cart-total">
+          <h3>Total Amount: ₱<span id="totalAmount">0</span></h3>
+        </div>
+        <button class="checkout-btn" id="checkoutBtn">Checkout</button>
+      </div>
+    </div>
 
     <footer>
       <p>© 01/26/2026 JLJM Timeless Cup — All Rights Reserved.</p>
