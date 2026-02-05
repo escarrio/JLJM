@@ -1,612 +1,361 @@
-// ==================== CART FUNCTIONALITY ====================
+// ==================== GLOBAL VARIABLES ====================
 let cart = [];
 
-// Initialize cart from localStorage
-function initCart() {
-  const savedCart = localStorage.getItem('jljmCart');
-  if (savedCart) {
-    cart = JSON.parse(savedCart);
-    updateCartCount();
-    syncQuantityInputs();
-  }
-}
+// ==================== DOM ELEMENTS ====================
+const hamburger = document.getElementById("hamburger");
+const navMenu = document.getElementById("navMenu");
+const navbar = document.getElementById("navbar");
+const cartBtn = document.getElementById("cartBtn");
+const cartModal = document.getElementById("cartModal");
+const checkoutModal = document.getElementById("checkoutModal");
+const cartCount = document.getElementById("cartCount");
+const closeModal = document.getElementsByClassName("close")[0];
+const closeCheckout = document.getElementById("closeCheckout");
+const checkoutBtn = document.getElementById("checkoutBtn");
+const confirmOrderBtn = document.getElementById("confirmOrderBtn");
 
-// Save cart to localStorage
-function saveCart() {
-  localStorage.setItem('jljmCart', JSON.stringify(cart));
-}
-
-// Update cart count in navigation
-function updateCartCount() {
-  const cartCount = document.getElementById('cartCount');
-  if (cartCount) {
-    const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
-    cartCount.textContent = totalItems;
-    
-    // Add animation
-    cartCount.style.transform = 'scale(1.3)';
-    setTimeout(() => {
-      cartCount.style.transform = 'scale(1)';
-    }, 300);
-  }
-}
-
-// Sync quantity inputs with cart data
-function syncQuantityInputs() {
-  const productCards = document.querySelectorAll('.product-card');
-  productCards.forEach(card => {
-    const itemName = card.dataset.item;
-    const qtyInput = card.querySelector('.qty-input');
-    
-    // Find matching cart item (considering temperature if applicable)
-    const savedItems = cart.filter(item => item.name === itemName);
-    if (savedItems.length > 0 && qtyInput) {
-      // Sum up quantities for all temperature variants
-      const totalQty = savedItems.reduce((sum, item) => sum + item.quantity, 0);
-      qtyInput.value = totalQty;
-    } else if (qtyInput) {
-      qtyInput.value = 1;
-    }
+// ==================== NAVIGATION ====================
+if (hamburger) {
+  hamburger.addEventListener("click", () => {
+    hamburger.classList.toggle("active");
+    navMenu.classList.toggle("active");
   });
 }
 
-// Get selected temperature for item
-function getSelectedTemperature(card) {
-  const tempOptions = card.querySelectorAll('input[type="radio"]');
-  if (tempOptions.length > 0) {
-    const checkedOption = card.querySelector('input[type="radio"]:checked');
-    return checkedOption ? checkedOption.value : 'hot';
-  }
-  return null; // No temperature option
-}
+// Close mobile menu when clicking on nav links
+document.querySelectorAll(".nav-link").forEach((link) => {
+  link.addEventListener("click", () => {
+    hamburger.classList.remove("active");
+    navMenu.classList.remove("active");
+  });
+});
 
-// Add/Update item in cart
-function updateCart(itemName, price, quantity, temperature) {
-  // Create unique key with temperature if applicable
-  const cartKey = temperature ? `${itemName} (${temperature})` : itemName;
-  const existingItem = cart.find(item => item.cartKey === cartKey);
-  
-  if (quantity === 0) {
-    cart = cart.filter(item => item.cartKey !== cartKey);
-  } else if (existingItem) {
-    existingItem.quantity = quantity;
+// Navbar scroll effect
+window.addEventListener("scroll", () => {
+  if (window.scrollY > 50) {
+    navbar.classList.add("scrolled");
   } else {
-    cart.push({
-      name: itemName,
-      price: price,
-      quantity: quantity,
-      temperature: temperature,
-      cartKey: cartKey
+    navbar.classList.remove("scrolled");
+  }
+});
+
+// ==================== QUANTITY CONTROLS ====================
+function increaseQty(button) {
+  const input = button.parentElement.querySelector(".qty-input");
+  input.value = parseInt(input.value) + 1;
+}
+
+function decreaseQty(button) {
+  const input = button.parentElement.querySelector(".qty-input");
+  if (parseInt(input.value) > 1) {
+    input.value = parseInt(input.value) - 1;
+  }
+}
+
+// ==================== SIZE/SLICE SELECTION WITH PRICE UPDATE ====================
+document.addEventListener("DOMContentLoaded", () => {
+  // Handle size option changes for coffee and cakes
+  document.querySelectorAll(".size-option input[type='radio']").forEach((radio) => {
+    radio.addEventListener("change", (e) => {
+      const productCard = e.target.closest(".product-card");
+      const priceDisplay = productCard.querySelector(".price-value");
+      const newPrice = e.target.getAttribute("data-price");
+      priceDisplay.textContent = newPrice;
     });
-  }
-  
-  saveCart();
-  updateCartCount();
+  });
+});
+
+// ==================== CATEGORY FILTER ====================
+const filterBtns = document.querySelectorAll(".filter-btn");
+const productCards = document.querySelectorAll(".product-card");
+
+if (filterBtns.length > 0) {
+  filterBtns.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const category = btn.getAttribute("data-category");
+
+      // Update active button
+      filterBtns.forEach((b) => b.classList.remove("active"));
+      btn.classList.add("active");
+
+      // Filter products
+      productCards.forEach((card) => {
+        if (category === "all" || card.getAttribute("data-category") === category) {
+          card.style.display = "block";
+        } else {
+          card.style.display = "none";
+        }
+      });
+    });
+  });
 }
 
-// Calculate total amount
-function calculateTotal() {
-  return cart.reduce((total, item) => total + (item.price * item.quantity), 0);
-}
+// ==================== ADD TO CART ====================
+document.querySelectorAll(".add-to-cart").forEach((btn) => {
+  btn.addEventListener("click", (e) => {
+    const productCard = e.target.closest(".product-card");
+    const name = productCard.querySelector(".product-name").textContent;
+    const priceValue = productCard.querySelector(".price-value").textContent;
+    const price = parseFloat(priceValue);
+    const quantity = parseInt(productCard.querySelector(".qty-input").value);
 
-// Update item quantity in cart modal
-function updateCartItemQuantity(cartKey, newQuantity) {
-  const item = cart.find(item => item.cartKey === cartKey);
-  if (item) {
-    if (newQuantity <= 0) {
-      cart = cart.filter(item => item.cartKey !== cartKey);
-      showToast('Item removed from cart');
+    // Get temperature (if available)
+    const tempRadio = productCard.querySelector('input[type="radio"][name^="temp-"]:checked');
+    const temperature = tempRadio ? tempRadio.value : null;
+
+    // Get size or slice selection
+    const sizeRadio = productCard.querySelector('input[type="radio"][name^="size-"]:checked');
+    const size = sizeRadio ? sizeRadio.value : null;
+
+    // Create unique item identifier
+    const itemId = `${name}-${temperature || 'none'}-${size || 'none'}`;
+
+    // Check if item already exists in cart
+    const existingItem = cart.find((item) => item.id === itemId);
+
+    if (existingItem) {
+      existingItem.quantity += quantity;
     } else {
-      item.quantity = newQuantity;
+      cart.push({
+        id: itemId,
+        name: name,
+        price: price,
+        quantity: quantity,
+        temperature: temperature,
+        size: size,
+      });
     }
-    saveCart();
-    updateCartCount();
-    displayCart();
-    syncQuantityInputs();
-  }
-}
 
-// Remove item from cart
-function removeCartItem(cartKey) {
-  cart = cart.filter(item => item.cartKey !== cartKey);
-  saveCart();
-  updateCartCount();
-  displayCart();
-  syncQuantityInputs();
-  showToast('Item removed from cart');
-}
+    updateCart();
+    showNotification(`${name} added to cart!`);
+  });
+});
 
-// Display cart items in modal
-function displayCart() {
-  const cartItemsDiv = document.getElementById('cartItems');
-  const totalAmountSpan = document.getElementById('totalAmount');
-  
-  if (!cartItemsDiv || !totalAmountSpan) return;
-  
+// ==================== UPDATE CART ====================
+function updateCart() {
+  // Update cart count
+  const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+  cartCount.textContent = totalItems;
+
+  // Update cart modal
+  const cartItemsDiv = document.getElementById("cartItems");
+  const totalAmountSpan = document.getElementById("totalAmount");
+
   if (cart.length === 0) {
-    cartItemsDiv.innerHTML = '<div class="empty-cart">☕ Your cart is empty<br>Start adding your favorites!</div>';
-    totalAmountSpan.textContent = '0';
+    cartItemsDiv.innerHTML = '<p class="empty-cart">Your cart is empty.<br>Add some delicious items to get started!</p>';
+    totalAmountSpan.textContent = "0";
     return;
   }
-  
+
   let cartHTML = '<div class="cart-items-list">';
+  let total = 0;
+
   cart.forEach((item, index) => {
     const subtotal = item.price * item.quantity;
-    const displayName = item.temperature 
-      ? `${item.name}`
-      : item.name;
-    const tempInfo = item.temperature 
-      ? `<div class="cart-item-temp">Temperature: ${item.temperature.charAt(0).toUpperCase() + item.temperature.slice(1)}</div>`
-      : '';
-    
+    total += subtotal;
+
+    // Build item details
+    let itemDetails = "";
+    if (item.temperature) {
+      itemDetails += `<div class="cart-item-temp">${item.temperature}</div>`;
+    }
+    if (item.size) {
+      itemDetails += `<div class="cart-item-price">Size: ${item.size}</div>`;
+    }
+
     cartHTML += `
-      <div class="cart-item-card" data-cart-key="${item.cartKey}">
+      <div class="cart-item-card">
         <div class="cart-item-header">
           <div class="cart-item-info">
-            <span class="cart-item-name">${displayName}</span>
-            ${tempInfo}
-            <span class="cart-item-price">₱${item.price} each</span>
+            <div class="cart-item-name">${item.name}</div>
+            ${itemDetails}
           </div>
           <div class="cart-item-controls">
             <div class="cart-qty-controls">
-              <button class="cart-qty-btn cart-minus" data-cart-key="${item.cartKey}" type="button">−</button>
+              <button class="cart-qty-btn" onclick="decreaseCartQty(${index})">−</button>
               <span class="cart-qty-display">${item.quantity}</span>
-              <button class="cart-qty-btn cart-plus" data-cart-key="${item.cartKey}" type="button">+</button>
+              <button class="cart-qty-btn" onclick="increaseCartQty(${index})">+</button>
             </div>
           </div>
         </div>
         <div class="cart-item-footer">
-          <button class="cart-remove-btn" data-cart-key="${item.cartKey}" type="button">Remove</button>
-          <div class="cart-item-subtotal">Subtotal: ₱${subtotal.toLocaleString()}</div>
+          <div class="cart-item-subtotal">₱${subtotal.toFixed(2)}</div>
+          <button class="cart-remove-btn" onclick="removeFromCart(${index})">Remove</button>
         </div>
       </div>
     `;
   });
-  cartHTML += '</div>';
-  
-  const total = calculateTotal();
+
+  cartHTML += "</div>";
   cartItemsDiv.innerHTML = cartHTML;
-  totalAmountSpan.textContent = total.toLocaleString();
-  
-  // Attach event listeners immediately after rendering
-  attachCartButtonListeners();
+  totalAmountSpan.textContent = total.toFixed(2);
 }
 
-// Attach event listeners directly to cart buttons
-function attachCartButtonListeners() {
-  // Plus buttons
-  document.querySelectorAll('.cart-plus').forEach(btn => {
-    btn.addEventListener('click', function(e) {
-      e.preventDefault();
-      e.stopPropagation();
-      const cartKey = this.getAttribute('data-cart-key');
-      const item = cart.find(i => i.cartKey === cartKey);
-      if (item) {
-        updateCartItemQuantity(cartKey, item.quantity + 1);
-      }
-    });
-  });
-  
-  // Minus buttons
-  document.querySelectorAll('.cart-minus').forEach(btn => {
-    btn.addEventListener('click', function(e) {
-      e.preventDefault();
-      e.stopPropagation();
-      const cartKey = this.getAttribute('data-cart-key');
-      const item = cart.find(i => i.cartKey === cartKey);
-      if (item) {
-        updateCartItemQuantity(cartKey, item.quantity - 1);
-      }
-    });
-  });
-  
-  // Remove buttons
-  document.querySelectorAll('.cart-remove-btn').forEach(btn => {
-    btn.addEventListener('click', function(e) {
-      e.preventDefault();
-      e.stopPropagation();
-      const cartKey = this.getAttribute('data-cart-key');
-      removeCartItem(cartKey);
-    });
-  });
+// ==================== CART QUANTITY CONTROLS ====================
+function increaseCartQty(index) {
+  cart[index].quantity++;
+  updateCart();
 }
 
-// ==================== QUANTITY CONTROLS ====================
-function setupQuantityControls() {
-  const productCards = document.querySelectorAll('.product-card');
-  
-  productCards.forEach(card => {
-    const itemName = card.dataset.item;
-    const itemPrice = parseInt(card.dataset.price);
-    const qtyInput = card.querySelector('.qty-input');
-    const minusBtn = card.querySelector('.minus');
-    const plusBtn = card.querySelector('.plus');
-    
-    if (!qtyInput || !minusBtn || !plusBtn) return;
-    
-    // Plus button
-    plusBtn.addEventListener('click', (e) => {
-      e.preventDefault();
-      const currentQty = parseInt(qtyInput.value);
-      const newQty = currentQty + 1;
-      const temperature = getSelectedTemperature(card);
-      
-      qtyInput.value = newQty;
-      updateCart(itemName, itemPrice, newQty, temperature);
-      
-      // Animation
-      qtyInput.style.transform = 'scale(1.2)';
-      plusBtn.style.transform = 'scale(0.9)';
-      setTimeout(() => {
-        qtyInput.style.transform = 'scale(1)';
-        plusBtn.style.transform = 'scale(1)';
-      }, 200);
-      
-      // Show success feedback
-      const tempLabel = temperature ? ` (${temperature})` : '';
-      showToast(`Added ${itemName}${tempLabel} to cart!`);
-    });
-    
-    // Minus button
-    minusBtn.addEventListener('click', (e) => {
-      e.preventDefault();
-      const currentQty = parseInt(qtyInput.value);
-      if (currentQty > 1) {
-        const newQty = currentQty - 1;
-        const temperature = getSelectedTemperature(card);
-        
-        qtyInput.value = newQty;
-        updateCart(itemName, itemPrice, newQty, temperature);
-        
-        // Animation
-        qtyInput.style.transform = 'scale(0.8)';
-        minusBtn.style.transform = 'scale(0.9)';
-        setTimeout(() => {
-          qtyInput.style.transform = 'scale(1)';
-          minusBtn.style.transform = 'scale(1)';
-        }, 200);
-      }
-    });
-    
-    // Temperature change handler - reset quantity when temperature changes
-    const tempRadios = card.querySelectorAll('input[type="radio"]');
-    tempRadios.forEach(radio => {
-      radio.addEventListener('change', () => {
-        qtyInput.value = 1;
-        showToast(`Temperature changed to ${radio.value}`);
-      });
-    });
-  });
+function decreaseCartQty(index) {
+  if (cart[index].quantity > 1) {
+    cart[index].quantity--;
+    updateCart();
+  }
+}
+
+function removeFromCart(index) {
+  const itemName = cart[index].name;
+  cart.splice(index, 1);
+  updateCart();
+  showNotification(`${itemName} removed from cart`);
 }
 
 // ==================== CART MODAL ====================
-const modal = document.getElementById('cartModal');
-const cartBtn = document.getElementById('cartBtn');
-const closeBtn = document.querySelector('.close');
-const checkoutBtn = document.getElementById('checkoutBtn');
-
 if (cartBtn) {
-  cartBtn.addEventListener('click', (e) => {
+  cartBtn.addEventListener("click", (e) => {
     e.preventDefault();
-    displayCart();
-    modal.style.display = 'block';
-    setTimeout(() => {
-      modal.style.opacity = '1';
-    }, 10);
+    cartModal.style.display = "block";
   });
 }
 
-if (closeBtn) {
-  closeBtn.addEventListener('click', () => {
-    modal.style.opacity = '0';
-    setTimeout(() => {
-      modal.style.display = 'none';
-    }, 300);
+if (closeModal) {
+  closeModal.addEventListener("click", () => {
+    cartModal.style.display = "none";
   });
 }
 
+// ==================== CHECKOUT FUNCTIONALITY ====================
 if (checkoutBtn) {
-  checkoutBtn.addEventListener('click', () => {
+  checkoutBtn.addEventListener("click", () => {
     if (cart.length === 0) {
-      alert('Your cart is empty! Please add items before checkout.');
+      showNotification("Your cart is empty!");
       return;
     }
-    
-    const total = calculateTotal();
-    const itemCount = cart.reduce((sum, item) => sum + item.quantity, 0);
-    
-    let orderSummary = '═══════════════════════════════\n';
-    orderSummary += '        📋 ORDER SUMMARY\n';
-    orderSummary += '═══════════════════════════════\n\n';
-    
-    cart.forEach(item => {
-      const tempLabel = item.temperature ? ` (${item.temperature.charAt(0).toUpperCase() + item.temperature.slice(1)})` : '';
-      const subtotal = item.price * item.quantity;
-      orderSummary += `${item.name}${tempLabel}\n`;
-      orderSummary += `  ${item.quantity} × ₱${item.price} = ₱${subtotal.toLocaleString()}\n\n`;
-    });
-    
-    orderSummary += '═══════════════════════════════\n';
-    orderSummary += `Total Items: ${itemCount}\n`;
-    orderSummary += `Total Amount: ₱${total.toLocaleString()}\n`;
-    orderSummary += '═══════════════════════════════';
-    
-    if (confirm(orderSummary + '\n\nProceed with checkout?')) {
-      showToast('Thank you for your order! ☕', 3000);
-      
-      // Clear cart
-      cart = [];
-      saveCart();
-      updateCartCount();
-      
-      // Reset all quantity inputs to 1
-      document.querySelectorAll('.qty-input').forEach(input => {
-        input.value = 1;
-      });
-      
-      modal.style.opacity = '0';
-      setTimeout(() => {
-        modal.style.display = 'none';
-      }, 300);
+
+    // Close cart modal
+    cartModal.style.display = "none";
+
+    // Populate checkout modal
+    updateCheckoutModal();
+
+    // Show checkout modal
+    checkoutModal.style.display = "block";
+  });
+}
+
+if (closeCheckout) {
+  closeCheckout.addEventListener("click", () => {
+    checkoutModal.style.display = "none";
+  });
+}
+
+function updateCheckoutModal() {
+  const checkoutItemsDiv = document.getElementById("checkoutItems");
+  const checkoutTotalSpan = document.getElementById("checkoutTotal");
+
+  let checkoutHTML = "";
+  let total = 0;
+
+  cart.forEach((item) => {
+    const subtotal = item.price * item.quantity;
+    total += subtotal;
+
+    let itemDetails = "";
+    if (item.temperature) {
+      itemDetails += ` (${item.temperature})`;
     }
+    if (item.size) {
+      itemDetails += ` - ${item.size}`;
+    }
+
+    checkoutHTML += `
+      <div class="checkout-item">
+        <div class="checkout-item-info">
+          <span class="checkout-item-name">${item.name}${itemDetails}</span>
+          <span class="checkout-item-qty">x${item.quantity}</span>
+        </div>
+        <span class="checkout-item-price">₱${subtotal.toFixed(2)}</span>
+      </div>
+    `;
+  });
+
+  checkoutItemsDiv.innerHTML = checkoutHTML;
+  checkoutTotalSpan.textContent = total.toFixed(2);
+}
+
+if (confirmOrderBtn) {
+  confirmOrderBtn.addEventListener("click", () => {
+    // Get selected payment method
+    const selectedPayment = document.querySelector('input[name="payment"]:checked');
+    
+    if (!selectedPayment) {
+      showNotification("Please select a payment method!");
+      return;
+    }
+
+    const paymentMethod = selectedPayment.value;
+    const total = document.getElementById("checkoutTotal").textContent;
+
+    // Show success message
+    showNotification(`Order confirmed! Total: ₱${total} via ${paymentMethod}`);
+
+    // Clear cart
+    cart = [];
+    updateCart();
+
+    // Close checkout modal
+    checkoutModal.style.display = "none";
   });
 }
 
-// Close modal when clicking outside
-window.addEventListener('click', (e) => {
-  if (e.target === modal) {
-    modal.style.opacity = '0';
+// Close modals when clicking outside
+window.addEventListener("click", (e) => {
+  if (e.target === cartModal) {
+    cartModal.style.display = "none";
+  }
+  if (e.target === checkoutModal) {
+    checkoutModal.style.display = "none";
+  }
+});
+
+// ==================== NOTIFICATION ====================
+function showNotification(message) {
+  // Create notification element
+  const notification = document.createElement("div");
+  notification.className = "notification";
+  notification.textContent = message;
+
+  // Add to body
+  document.body.appendChild(notification);
+
+  // Show notification
+  setTimeout(() => {
+    notification.classList.add("show");
+  }, 100);
+
+  // Remove notification after 3 seconds
+  setTimeout(() => {
+    notification.classList.remove("show");
     setTimeout(() => {
-      modal.style.display = 'none';
+      notification.remove();
     }, 300);
-  }
-});
-
-// ==================== NAVIGATION ====================
-const navbar = document.getElementById('navbar');
-const hamburger = document.getElementById('hamburger');
-const navMenu = document.getElementById('navMenu');
-
-// Scroll effect
-let lastScroll = 0;
-window.addEventListener('scroll', () => {
-  const currentScroll = window.pageYOffset;
-  
-  if (currentScroll > 100) {
-    navbar.classList.add('scrolled');
-  } else {
-    navbar.classList.remove('scrolled');
-  }
-  
-  lastScroll = currentScroll;
-});
-
-// Mobile menu toggle
-if (hamburger) {
-  hamburger.addEventListener('click', () => {
-    hamburger.classList.toggle('active');
-    navMenu.classList.toggle('active');
-  });
+  }, 3000);
 }
-
-// Close mobile menu when clicking nav link
-document.querySelectorAll('.nav-link').forEach(link => {
-  link.addEventListener('click', () => {
-    hamburger?.classList.remove('active');
-    navMenu?.classList.remove('active');
-  });
-});
 
 // ==================== SMOOTH SCROLL ====================
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-  anchor.addEventListener('click', function(e) {
-    const href = this.getAttribute('href');
-    if (href === '#') return;
-    
-    e.preventDefault();
-    const target = document.querySelector(href);
-    
-    if (target) {
-      const offsetTop = target.offsetTop - 80;
-      window.scrollTo({
-        top: offsetTop,
-        behavior: 'smooth'
-      });
-    }
-  });
-});
-
-// ==================== CATEGORY FILTER (Dashboard) ====================
-const filterBtns = document.querySelectorAll('.filter-btn');
-const productCards = document.querySelectorAll('.product-card');
-
-filterBtns.forEach(btn => {
-  btn.addEventListener('click', () => {
-    const category = btn.dataset.category;
-    
-    // Update active button
-    filterBtns.forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    
-    // Filter products
-    productCards.forEach((card, index) => {
-      if (category === 'all' || card.dataset.category === category) {
-        card.style.display = 'block';
-        card.style.animation = 'none';
-        setTimeout(() => {
-          card.style.animation = `productFadeIn 0.6s ease-out ${index * 0.1}s forwards`;
-        }, 10);
-      } else {
-        card.style.display = 'none';
-      }
-    });
-  });
-});
-
-// ==================== INTERSECTION OBSERVER ====================
-const observerOptions = {
-  threshold: 0.1,
-  rootMargin: '0px 0px -50px 0px'
-};
-
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('visible');
-      
-      // Add stagger animation for cards
-      if (entry.target.classList.contains('about-card')) {
-        const cards = document.querySelectorAll('.about-card');
-        cards.forEach((card, index) => {
-          setTimeout(() => {
-            card.style.opacity = '1';
-            card.style.transform = 'translateY(0)';
-          }, index * 150);
+document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+  anchor.addEventListener("click", function (e) {
+    const href = this.getAttribute("href");
+    if (href !== "#" && href.startsWith("#")) {
+      e.preventDefault();
+      const target = document.querySelector(href);
+      if (target) {
+        target.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
         });
       }
     }
   });
-}, observerOptions);
-
-// Observe sections
-document.querySelectorAll('.about-section, .menu-section, .experience-section').forEach(section => {
-  observer.observe(section);
 });
-
-// ==================== PARALLAX EFFECT ====================
-window.addEventListener('scroll', () => {
-  const scrolled = window.pageYOffset;
-  const hero = document.querySelector('.hero');
-  
-  if (hero) {
-    hero.style.backgroundPositionY = scrolled * 0.5 + 'px';
-  }
-});
-
-// ==================== TOAST NOTIFICATION ====================
-function showToast(message, duration = 2000) {
-  // Remove existing toasts
-  const existingToast = document.querySelector('.toast');
-  if (existingToast) {
-    existingToast.remove();
-  }
-  
-  const toast = document.createElement('div');
-  toast.className = 'toast';
-  toast.textContent = message;
-  toast.style.cssText = `
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    background: linear-gradient(135deg, #C9A788, #A67C52);
-    color: white;
-    padding: 16px 24px;
-    border-radius: 30px;
-    font-weight: 600;
-    font-size: 14px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-    z-index: 10000;
-    animation: slideInRight 0.4s ease-out;
-    max-width: 300px;
-  `;
-  
-  document.body.appendChild(toast);
-  
-  setTimeout(() => {
-    toast.style.animation = 'slideOutRight 0.4s ease-out';
-    setTimeout(() => {
-      toast.remove();
-    }, 400);
-  }, duration);
-}
-
-// Add toast animations to CSS
-const style = document.createElement('style');
-style.textContent = `
-  @keyframes slideInRight {
-    from {
-      transform: translateX(400px);
-      opacity: 0;
-    }
-    to {
-      transform: translateX(0);
-      opacity: 1;
-    }
-  }
-  
-  @keyframes slideOutRight {
-    from {
-      transform: translateX(0);
-      opacity: 1;
-    }
-    to {
-      transform: translateX(400px);
-      opacity: 0;
-    }
-  }
-`;
-document.head.appendChild(style);
-
-// ==================== PAGE LOAD ANIMATION ====================
-window.addEventListener('load', () => {
-  document.body.style.opacity = '0';
-  document.body.style.transition = 'opacity 0.5s ease';
-  
-  setTimeout(() => {
-    document.body.style.opacity = '1';
-  }, 100);
-  
-  // Initialize cart and quantity controls
-  initCart();
-  setupQuantityControls();
-});
-
-// ==================== MENU CARD HOVER EFFECT ====================
-const menuCards = document.querySelectorAll('.menu-card, .product-card');
-menuCards.forEach(card => {
-  card.addEventListener('mouseenter', function() {
-    this.style.transform = 'translateY(-10px)';
-  });
-  
-  card.addEventListener('mouseleave', function() {
-    this.style.transform = 'translateY(0)';
-  });
-});
-
-// ==================== ACTIVE NAV LINK ====================
-function updateActiveNavLink() {
-  const sections = document.querySelectorAll('section[id]');
-  const navLinks = document.querySelectorAll('.nav-link');
-  
-  let current = '';
-  sections.forEach(section => {
-    const sectionTop = section.offsetTop;
-    const sectionHeight = section.clientHeight;
-    if (window.pageYOffset >= (sectionTop - 100)) {
-      current = section.getAttribute('id');
-    }
-  });
-  
-  navLinks.forEach(link => {
-    link.classList.remove('active');
-    if (link.getAttribute('href') === `#${current}`) {
-      link.classList.add('active');
-    }
-  });
-}
-
-window.addEventListener('scroll', updateActiveNavLink);
-
-// ==================== CONSOLE WELCOME MESSAGE ====================
-console.log(
-  '%c☕ Welcome to JLJM Timeless Cup! ☕',
-  'color: #C9A788; font-size: 24px; font-weight: bold; padding: 10px; font-family: Playfair Display, serif;'
-);
-console.log(
-  '%cWhere every sip tells a timeless story.',
-  'color: #A67C52; font-size: 16px; font-style: italic; padding: 5px;'
-);
-console.log(
-  '%cEnjoy your coffee experience! 🎨',
-  'color: #6F4E37; font-size: 14px; padding: 5px;'
-);
