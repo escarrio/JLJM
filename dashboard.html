@@ -59,6 +59,7 @@
           </button>
           <button class="filter-btn" data-category="coffee">Coffee</button>
           <button class="filter-btn" data-category="pastry">Pastries</button>
+          <button class="filter-btn" data-category="cake">Cakes</button>
         </div>
 
         <!-- Products Grid -->
@@ -592,47 +593,51 @@
           <div class="product-card" data-category="pastry">
             <div class="product-image">
               <img
-                src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?q=80&w=689&auto=format&fit=crop"
-                alt="Chocolate Cake"
+                src="https://images.unsplash.com/photo-1612198188060-c7c2a3b66eae?q=80&w=1170&auto=format&fit=crop"
+                alt="Croissant"
               />
-              <span class="product-badge">New</span>
+              <span class="product-badge">Fresh</span>
             </div>
             <div class="product-content">
-              <h3 class="product-name">Chocolate Cake</h3>
+              <h3 class="product-name">Croissant</h3>
               <p class="product-description">
-                Rich, moist chocolate cake with creamy frosting
+                Buttery, flaky French pastry
               </p>
 
-              <div class="size-options">
-                <label class="size-option">
+              <!-- Flavor Options -->
+              <div class="flavor-options">
+                <label class="flavor-option">
                   <input
                     type="radio"
-                    name="size-chocolate-cake"
-                    value="2 Slices"
-                    data-price="180"
+                    name="flavor-croissant"
+                    value="Chocolate"
+                    data-price="120"
                     checked
                   />
-                  <span>
-                    <div class="size-label">2 Slices</div>
-                    <div class="size-desc">Perfect for sharing</div>
-                  </span>
+                  <span>🍫 Chocolate</span>
                 </label>
-                <label class="size-option">
+                <label class="flavor-option">
                   <input
                     type="radio"
-                    name="size-chocolate-cake"
-                    value="Whole Cake"
-                    data-price="850"
+                    name="flavor-croissant"
+                    value="Cheese"
+                    data-price="120"
                   />
-                  <span>
-                    <div class="size-label">Whole Cake</div>
-                    <div class="size-desc">8-10 servings</div>
-                  </span>
+                  <span>🧀 Cheese</span>
+                </label>
+                <label class="flavor-option">
+                  <input
+                    type="radio"
+                    name="flavor-croissant"
+                    value="Ube"
+                    data-price="130"
+                  />
+                  <span>🟣 Ube</span>
                 </label>
               </div>
 
               <div class="product-footer">
-                <span class="product-price">₱<span class="price-value">180</span></span>
+                <span class="product-price">₱<span class="price-value">120</span></span>
                 <div class="quantity-controls">
                   <button class="qty-btn" onclick="decreaseQty(this)">−</button>
                   <input
@@ -654,46 +659,49 @@
           <div class="product-card" data-category="pastry">
             <div class="product-image">
               <img
-                src="https://images.unsplash.com/photo-1621303837174-89787a7d4729?q=80&w=736&auto=format&fit=crop"
-                alt="Blueberry Cheesecake"
+                src="https://images.unsplash.com/photo-1509440159596-0249088772ff?q=80&w=1172&auto=format&fit=crop"
+                alt="Danish Pastry"
               />
             </div>
             <div class="product-content">
-              <h3 class="product-name">Blueberry Cheesecake</h3>
+              <h3 class="product-name">Danish Pastry</h3>
               <p class="product-description">
-                Creamy cheesecake topped with fresh blueberries
+                Sweet layered pastry with filling
               </p>
 
-              <div class="size-options">
-                <label class="size-option">
+              <div class="flavor-options">
+                <label class="flavor-option">
                   <input
                     type="radio"
-                    name="size-blueberry-cheesecake"
-                    value="2 Slices"
-                    data-price="200"
+                    name="flavor-danish"
+                    value="Chocolate"
+                    data-price="110"
                     checked
                   />
-                  <span>
-                    <div class="size-label">2 Slices</div>
-                    <div class="size-desc">Perfect for sharing</div>
-                  </span>
+                  <span>🍫 Chocolate</span>
                 </label>
-                <label class="size-option">
+                <label class="flavor-option">
                   <input
                     type="radio"
-                    name="size-blueberry-cheesecake"
-                    value="Whole Cake"
-                    data-price="950"
+                    name="flavor-danish"
+                    value="Cheese"
+                    data-price="110"
                   />
-                  <span>
-                    <div class="size-label">Whole Cake</div>
-                    <div class="size-desc">8-10 servings</div>
-                  </span>
+                  <span>🧀 Cheese</span>
+                </label>
+                <label class="flavor-option">
+                  <input
+                    type="radio"
+                    name="flavor-danish"
+                    value="Ube"
+                    data-price="120"
+                  />
+                  <span>🟣 Ube</span>
                 </label>
               </div>
 
               <div class="product-footer">
-                <span class="product-price">₱<span class="price-value">200</span></span>
+                <span class="product-price">₱<span class="price-value">110</span></span>
                 <div class="quantity-controls">
                   <button class="qty-btn" onclick="decreaseQty(this)">−</button>
                   <input
@@ -713,6 +721,199 @@
           </div>
 
           <div class="product-card" data-category="pastry">
+            <div class="product-image">
+              <img
+                src="https://images.unsplash.com/photo-1603532648955-039310d9ed75?q=80&w=1887&auto=format&fit=crop"
+                alt="Ensaymada"
+              />
+              <span class="product-badge">Popular</span>
+            </div>
+            <div class="product-content">
+              <h3 class="product-name">Ensaymada</h3>
+              <p class="product-description">
+                Filipino sweet bread with butter and cheese
+              </p>
+
+              <div class="flavor-options">
+                <label class="flavor-option">
+                  <input
+                    type="radio"
+                    name="flavor-ensaymada"
+                    value="Chocolate"
+                    data-price="100"
+                    checked
+                  />
+                  <span>🍫 Chocolate</span>
+                </label>
+                <label class="flavor-option">
+                  <input
+                    type="radio"
+                    name="flavor-ensaymada"
+                    value="Cheese"
+                    data-price="90"
+                  />
+                  <span>🧀 Cheese</span>
+                </label>
+                <label class="flavor-option">
+                  <input
+                    type="radio"
+                    name="flavor-ensaymada"
+                    value="Ube"
+                    data-price="110"
+                  />
+                  <span>🟣 Ube</span>
+                </label>
+              </div>
+
+              <div class="product-footer">
+                <span class="product-price">₱<span class="price-value">100</span></span>
+                <div class="quantity-controls">
+                  <button class="qty-btn" onclick="decreaseQty(this)">−</button>
+                  <input
+                    type="number"
+                    class="qty-input"
+                    value="1"
+                    min="1"
+                    readonly
+                  />
+                  <button class="qty-btn" onclick="increaseQty(this)">+</button>
+                </div>
+              </div>
+              <button class="btn btn-primary btn-full add-to-cart">
+                Add to Cart
+              </button>
+            </div>
+          </div>
+
+          <!-- Cake Items -->
+          <div class="product-card" data-category="cake">
+            <div class="product-image">
+              <img
+                src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?q=80&w=689&auto=format&fit=crop"
+                alt="Chocolate Cake"
+              />
+              <span class="product-badge">New</span>
+            </div>
+            <div class="product-content">
+              <h3 class="product-name">Chocolate Cake</h3>
+              <p class="product-description">
+                Rich, moist chocolate cake with creamy frosting
+              </p>
+
+              <!-- Slice Input -->
+              <div class="slice-input-section">
+                <label class="slice-label">
+                  <span>Number of Slices (₱90/slice):</span>
+                  <div class="slice-input-controls">
+                    <button class="slice-btn" onclick="decreaseSlices(this)" type="button">−</button>
+                    <input
+                      type="number"
+                      class="slice-number-input"
+                      value="1"
+                      min="1"
+                      max="10"
+                      data-price-per-slice="90"
+                    />
+                    <button class="slice-btn" onclick="increaseSlices(this)" type="button">+</button>
+                  </div>
+                </label>
+              </div>
+
+              <!-- Whole Cake Option -->
+              <div class="whole-cake-option">
+                <label class="whole-cake-label">
+                  <input
+                    type="checkbox"
+                    class="whole-cake-checkbox"
+                    data-whole-price="850"
+                  />
+                  <span>Order Whole Cake (8-10 servings) - ₱850</span>
+                </label>
+              </div>
+
+              <div class="product-footer">
+                <span class="product-price">₱<span class="price-value">90</span></span>
+                <div class="quantity-controls">
+                  <button class="qty-btn" onclick="decreaseQty(this)">−</button>
+                  <input
+                    type="number"
+                    class="qty-input"
+                    value="1"
+                    min="1"
+                    readonly
+                  />
+                  <button class="qty-btn" onclick="increaseQty(this)">+</button>
+                </div>
+              </div>
+              <button class="btn btn-primary btn-full add-to-cart">
+                Add to Cart
+              </button>
+            </div>
+          </div>
+
+          <div class="product-card" data-category="cake">
+            <div class="product-image">
+              <img
+                src="https://images.unsplash.com/photo-1621303837174-89787a7d4729?q=80&w=736&auto=format&fit=crop"
+                alt="Blueberry Cheesecake"
+              />
+            </div>
+            <div class="product-content">
+              <h3 class="product-name">Blueberry Cheesecake</h3>
+              <p class="product-description">
+                Creamy cheesecake topped with fresh blueberries
+              </p>
+
+              <div class="slice-input-section">
+                <label class="slice-label">
+                  <span>Number of Slices (₱100/slice):</span>
+                  <div class="slice-input-controls">
+                    <button class="slice-btn" onclick="decreaseSlices(this)" type="button">−</button>
+                    <input
+                      type="number"
+                      class="slice-number-input"
+                      value="1"
+                      min="1"
+                      max="10"
+                      data-price-per-slice="100"
+                    />
+                    <button class="slice-btn" onclick="increaseSlices(this)" type="button">+</button>
+                  </div>
+                </label>
+              </div>
+
+              <div class="whole-cake-option">
+                <label class="whole-cake-label">
+                  <input
+                    type="checkbox"
+                    class="whole-cake-checkbox"
+                    data-whole-price="950"
+                  />
+                  <span>Order Whole Cake (8-10 servings) - ₱950</span>
+                </label>
+              </div>
+
+              <div class="product-footer">
+                <span class="product-price">₱<span class="price-value">100</span></span>
+                <div class="quantity-controls">
+                  <button class="qty-btn" onclick="decreaseQty(this)">−</button>
+                  <input
+                    type="number"
+                    class="qty-input"
+                    value="1"
+                    min="1"
+                    readonly
+                  />
+                  <button class="qty-btn" onclick="increaseQty(this)">+</button>
+                </div>
+              </div>
+              <button class="btn btn-primary btn-full add-to-cart">
+                Add to Cart
+              </button>
+            </div>
+          </div>
+
+          <div class="product-card" data-category="cake">
             <div class="product-image">
               <img
                 src="https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?q=80&w=736&auto=format&fit=crop"
@@ -726,36 +927,37 @@
                 Spiced carrot cake with cream cheese frosting
               </p>
 
-              <div class="size-options">
-                <label class="size-option">
-                  <input
-                    type="radio"
-                    name="size-carrot-cake"
-                    value="2 Slices"
-                    data-price="190"
-                    checked
-                  />
-                  <span>
-                    <div class="size-label">2 Slices</div>
-                    <div class="size-desc">Perfect for sharing</div>
-                  </span>
+              <div class="slice-input-section">
+                <label class="slice-label">
+                  <span>Number of Slices (₱95/slice):</span>
+                  <div class="slice-input-controls">
+                    <button class="slice-btn" onclick="decreaseSlices(this)" type="button">−</button>
+                    <input
+                      type="number"
+                      class="slice-number-input"
+                      value="1"
+                      min="1"
+                      max="10"
+                      data-price-per-slice="95"
+                    />
+                    <button class="slice-btn" onclick="increaseSlices(this)" type="button">+</button>
+                  </div>
                 </label>
-                <label class="size-option">
+              </div>
+
+              <div class="whole-cake-option">
+                <label class="whole-cake-label">
                   <input
-                    type="radio"
-                    name="size-carrot-cake"
-                    value="Whole Cake"
-                    data-price="900"
+                    type="checkbox"
+                    class="whole-cake-checkbox"
+                    data-whole-price="900"
                   />
-                  <span>
-                    <div class="size-label">Whole Cake</div>
-                    <div class="size-desc">8-10 servings</div>
-                  </span>
+                  <span>Order Whole Cake (8-10 servings) - ₱900</span>
                 </label>
               </div>
 
               <div class="product-footer">
-                <span class="product-price">₱<span class="price-value">190</span></span>
+                <span class="product-price">₱<span class="price-value">95</span></span>
                 <div class="quantity-controls">
                   <button class="qty-btn" onclick="decreaseQty(this)">−</button>
                   <input
@@ -774,7 +976,7 @@
             </div>
           </div>
 
-          <div class="product-card" data-category="pastry">
+          <div class="product-card" data-category="cake">
             <div class="product-image">
               <img
                 src="https://images.unsplash.com/photo-1586985289688-ca3cf47d3e6e?q=80&w=687&auto=format&fit=crop"
@@ -787,36 +989,37 @@
                 Velvety red cake with cream cheese frosting
               </p>
 
-              <div class="size-options">
-                <label class="size-option">
-                  <input
-                    type="radio"
-                    name="size-red-velvet"
-                    value="2 Slices"
-                    data-price="200"
-                    checked
-                  />
-                  <span>
-                    <div class="size-label">2 Slices</div>
-                    <div class="size-desc">Perfect for sharing</div>
-                  </span>
+              <div class="slice-input-section">
+                <label class="slice-label">
+                  <span>Number of Slices (₱100/slice):</span>
+                  <div class="slice-input-controls">
+                    <button class="slice-btn" onclick="decreaseSlices(this)" type="button">−</button>
+                    <input
+                      type="number"
+                      class="slice-number-input"
+                      value="1"
+                      min="1"
+                      max="10"
+                      data-price-per-slice="100"
+                    />
+                    <button class="slice-btn" onclick="increaseSlices(this)" type="button">+</button>
+                  </div>
                 </label>
-                <label class="size-option">
+              </div>
+
+              <div class="whole-cake-option">
+                <label class="whole-cake-label">
                   <input
-                    type="radio"
-                    name="size-red-velvet"
-                    value="Whole Cake"
-                    data-price="950"
+                    type="checkbox"
+                    class="whole-cake-checkbox"
+                    data-whole-price="950"
                   />
-                  <span>
-                    <div class="size-label">Whole Cake</div>
-                    <div class="size-desc">8-10 servings</div>
-                  </span>
+                  <span>Order Whole Cake (8-10 servings) - ₱950</span>
                 </label>
               </div>
 
               <div class="product-footer">
-                <span class="product-price">₱<span class="price-value">200</span></span>
+                <span class="product-price">₱<span class="price-value">100</span></span>
                 <div class="quantity-controls">
                   <button class="qty-btn" onclick="decreaseQty(this)">−</button>
                   <input
@@ -835,7 +1038,7 @@
             </div>
           </div>
 
-          <div class="product-card" data-category="pastry">
+          <div class="product-card" data-category="cake">
             <div class="product-image">
               <img
                 src="https://images.unsplash.com/photo-1565958011703-44f9829ba187?q=80&w=765&auto=format&fit=crop"
@@ -849,36 +1052,37 @@
                 Light sponge cake with fresh strawberries and cream
               </p>
 
-              <div class="size-options">
-                <label class="size-option">
-                  <input
-                    type="radio"
-                    name="size-strawberry"
-                    value="2 Slices"
-                    data-price="210"
-                    checked
-                  />
-                  <span>
-                    <div class="size-label">2 Slices</div>
-                    <div class="size-desc">Perfect for sharing</div>
-                  </span>
+              <div class="slice-input-section">
+                <label class="slice-label">
+                  <span>Number of Slices (₱105/slice):</span>
+                  <div class="slice-input-controls">
+                    <button class="slice-btn" onclick="decreaseSlices(this)" type="button">−</button>
+                    <input
+                      type="number"
+                      class="slice-number-input"
+                      value="1"
+                      min="1"
+                      max="10"
+                      data-price-per-slice="105"
+                    />
+                    <button class="slice-btn" onclick="increaseSlices(this)" type="button">+</button>
+                  </div>
                 </label>
-                <label class="size-option">
+              </div>
+
+              <div class="whole-cake-option">
+                <label class="whole-cake-label">
                   <input
-                    type="radio"
-                    name="size-strawberry"
-                    value="Whole Cake"
-                    data-price="1000"
+                    type="checkbox"
+                    class="whole-cake-checkbox"
+                    data-whole-price="1000"
                   />
-                  <span>
-                    <div class="size-label">Whole Cake</div>
-                    <div class="size-desc">8-10 servings</div>
-                  </span>
+                  <span>Order Whole Cake (8-10 servings) - ₱1000</span>
                 </label>
               </div>
 
               <div class="product-footer">
-                <span class="product-price">₱<span class="price-value">210</span></span>
+                <span class="product-price">₱<span class="price-value">105</span></span>
                 <div class="quantity-controls">
                   <button class="qty-btn" onclick="decreaseQty(this)">−</button>
                   <input
@@ -897,7 +1101,7 @@
             </div>
           </div>
 
-          <div class="product-card" data-category="pastry">
+          <div class="product-card" data-category="cake">
             <div class="product-image">
               <img
                 src="https://images.unsplash.com/photo-1631206443660-91c76a774def?q=80&w=687&auto=format&fit=crop"
@@ -911,36 +1115,37 @@
                 Italian coffee-flavored layered dessert
               </p>
 
-              <div class="size-options">
-                <label class="size-option">
-                  <input
-                    type="radio"
-                    name="size-tiramisu"
-                    value="2 Slices"
-                    data-price="220"
-                    checked
-                  />
-                  <span>
-                    <div class="size-label">2 Slices</div>
-                    <div class="size-desc">Perfect for sharing</div>
-                  </span>
+              <div class="slice-input-section">
+                <label class="slice-label">
+                  <span>Number of Slices (₱110/slice):</span>
+                  <div class="slice-input-controls">
+                    <button class="slice-btn" onclick="decreaseSlices(this)" type="button">−</button>
+                    <input
+                      type="number"
+                      class="slice-number-input"
+                      value="1"
+                      min="1"
+                      max="10"
+                      data-price-per-slice="110"
+                    />
+                    <button class="slice-btn" onclick="increaseSlices(this)" type="button">+</button>
+                  </div>
                 </label>
-                <label class="size-option">
+              </div>
+
+              <div class="whole-cake-option">
+                <label class="whole-cake-label">
                   <input
-                    type="radio"
-                    name="size-tiramisu"
-                    value="Whole Cake"
-                    data-price="1050"
+                    type="checkbox"
+                    class="whole-cake-checkbox"
+                    data-whole-price="1050"
                   />
-                  <span>
-                    <div class="size-label">Whole Cake</div>
-                    <div class="size-desc">8-10 servings</div>
-                  </span>
+                  <span>Order Whole Cake (8-10 servings) - ₱1050</span>
                 </label>
               </div>
 
               <div class="product-footer">
-                <span class="product-price">₱<span class="price-value">220</span></span>
+                <span class="product-price">₱<span class="price-value">110</span></span>
                 <div class="quantity-controls">
                   <button class="qty-btn" onclick="decreaseQty(this)">−</button>
                   <input
