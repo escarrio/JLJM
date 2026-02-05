@@ -45,7 +45,7 @@ function syncQuantityInputs() {
       const totalQty = savedItems.reduce((sum, item) => sum + item.quantity, 0);
       qtyInput.value = totalQty;
     } else if (qtyInput) {
-      qtyInput.value = 0;
+      qtyInput.value = 1;
     }
   });
 }
@@ -251,7 +251,7 @@ function setupQuantityControls() {
     minusBtn.addEventListener('click', (e) => {
       e.preventDefault();
       const currentQty = parseInt(qtyInput.value);
-      if (currentQty > 0) {
+      if (currentQty > 1) {
         const newQty = currentQty - 1;
         const temperature = getSelectedTemperature(card);
         
@@ -265,11 +265,6 @@ function setupQuantityControls() {
           qtyInput.style.transform = 'scale(1)';
           minusBtn.style.transform = 'scale(1)';
         }, 200);
-        
-        if (newQty === 0) {
-          const tempLabel = temperature ? ` (${temperature})` : '';
-          showToast(`Removed ${itemName}${tempLabel} from cart`);
-        }
       }
     });
     
@@ -277,7 +272,7 @@ function setupQuantityControls() {
     const tempRadios = card.querySelectorAll('input[type="radio"]');
     tempRadios.forEach(radio => {
       radio.addEventListener('change', () => {
-        qtyInput.value = 0;
+        qtyInput.value = 1;
         showToast(`Temperature changed to ${radio.value}`);
       });
     });
@@ -344,9 +339,9 @@ if (checkoutBtn) {
       saveCart();
       updateCartCount();
       
-      // Reset all quantity inputs
+      // Reset all quantity inputs to 1
       document.querySelectorAll('.qty-input').forEach(input => {
-        input.value = 0;
+        input.value = 1;
       });
       
       modal.style.opacity = '0';
