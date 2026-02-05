@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Order Now | JLJM Timeless Cup</title>
+    <title>Menu Dashboard | JLJM Timeless Cup</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -12,7 +12,6 @@
     />
     <link rel="stylesheet" href="styles.css" />
   </head>
-
   <body class="dashboard-body">
     <!-- Navigation -->
     <nav class="navbar" id="navbar">
@@ -40,55 +39,107 @@
       </div>
     </nav>
 
-    <!-- Dashboard Header -->
+    <!-- Dashboard Hero -->
     <section class="dashboard-hero">
       <div class="container">
-        <div class="dashboard-hero-content">
-          <h1 class="page-title">Order Your Favorites</h1>
-          <p class="page-subtitle">
-            Customize your perfect cup and have it ready when you are
-          </p>
-        </div>
+        <h1 class="page-title">Our Menu</h1>
+        <p class="page-subtitle">
+          Discover our handcrafted beverages and delicious treats
+        </p>
       </div>
     </section>
 
-    <!-- Menu Categories -->
+    <!-- Menu Dashboard -->
     <section class="dashboard-menu">
       <div class="container">
+        <!-- Category Filter -->
         <div class="category-filter">
           <button class="filter-btn active" data-category="all">
             All Items
           </button>
           <button class="filter-btn" data-category="coffee">Coffee</button>
-          <button class="filter-btn" data-category="pastries">Pastries</button>
-          <button class="filter-btn" data-category="cakes">Cakes</button>
+          <button class="filter-btn" data-category="pastry">Pastries</button>
         </div>
 
-        <div class="products-grid">
+        <!-- Products Grid -->
+        <div class="products-grid" id="productsGrid">
           <!-- Coffee Items -->
-          <div
-            class="product-card"
-            data-category="coffee"
-            data-item="Cappuccino"
-            data-price="150"
-            data-options="hot"
-          >
+          <div class="product-card" data-category="coffee">
             <div class="product-image">
               <img
                 src="https://images.unsplash.com/photo-1686315715890-9083c5c5c861?q=80&w=685&auto=format&fit=crop"
                 alt="Cappuccino"
               />
-              <span class="product-badge">Hot</span>
+              <span class="product-badge">Popular</span>
             </div>
             <div class="product-content">
               <h3 class="product-name">Cappuccino</h3>
               <p class="product-description">
-                Rich espresso with velvety milk foam
+                Rich espresso with velvety steamed milk and foam
               </p>
+
+              <!-- Temperature Options -->
+              <div class="temperature-options">
+                <label class="temp-option">
+                  <input
+                    type="radio"
+                    name="temp-cappuccino"
+                    value="Hot"
+                    checked
+                  />
+                  <span>☕ Hot</span>
+                </label>
+                <label class="temp-option">
+                  <input type="radio" name="temp-cappuccino" value="Iced" />
+                  <span>🧊 Iced</span>
+                </label>
+              </div>
+
+              <!-- Size Options -->
+              <div class="size-options">
+                <label class="size-option">
+                  <input
+                    type="radio"
+                    name="size-cappuccino"
+                    value="Small"
+                    data-price="130"
+                    checked
+                  />
+                  <span>
+                    <div class="size-label">Small</div>
+                    <div class="size-desc">8 oz</div>
+                  </span>
+                </label>
+                <label class="size-option">
+                  <input
+                    type="radio"
+                    name="size-cappuccino"
+                    value="Medium"
+                    data-price="150"
+                  />
+                  <span>
+                    <div class="size-label">Medium</div>
+                    <div class="size-desc">12 oz</div>
+                  </span>
+                </label>
+                <label class="size-option">
+                  <input
+                    type="radio"
+                    name="size-cappuccino"
+                    value="Large"
+                    data-price="170"
+                  />
+                  <span>
+                    <div class="size-label">Large</div>
+                    <div class="size-desc">16 oz</div>
+                  </span>
+                </label>
+              </div>
+
               <div class="product-footer">
-                <span class="product-price">₱150</span>
+                <span class="product-price">₱<span class="price-value">130</span></span>
                 <div class="quantity-controls">
-                  <button class="qty-btn minus">−</button>
+                  <button class="qty-btn" onclick="decreaseQty(this)">−</button>
                   <input
                     type="number"
                     class="qty-input"
@@ -96,33 +147,83 @@
                     min="1"
                     readonly
                   />
-                  <button class="qty-btn plus">+</button>
+                  <button class="qty-btn" onclick="increaseQty(this)">+</button>
                 </div>
               </div>
+              <button class="btn btn-primary btn-full add-to-cart">
+                Add to Cart
+              </button>
             </div>
           </div>
 
-          <div
-            class="product-card"
-            data-category="coffee"
-            data-item="Espresso"
-            data-price="120"
-            data-options="hot"
-          >
+          <div class="product-card" data-category="coffee">
             <div class="product-image">
               <img
                 src="https://images.unsplash.com/photo-1510591509098-f4fdc6d0ff04?q=80&w=687&auto=format&fit=crop"
                 alt="Espresso"
               />
-              <span class="product-badge">Hot</span>
             </div>
             <div class="product-content">
               <h3 class="product-name">Espresso</h3>
-              <p class="product-description">Bold and intense coffee shot</p>
+              <p class="product-description">
+                Bold and intense coffee shot with rich crema
+              </p>
+
+              <div class="temperature-options">
+                <label class="temp-option">
+                  <input type="radio" name="temp-espresso" value="Hot" checked />
+                  <span>☕ Hot</span>
+                </label>
+                <label class="temp-option">
+                  <input type="radio" name="temp-espresso" value="Iced" />
+                  <span>🧊 Iced</span>
+                </label>
+              </div>
+
+              <div class="size-options">
+                <label class="size-option">
+                  <input
+                    type="radio"
+                    name="size-espresso"
+                    value="Small"
+                    data-price="100"
+                    checked
+                  />
+                  <span>
+                    <div class="size-label">Small</div>
+                    <div class="size-desc">2 oz</div>
+                  </span>
+                </label>
+                <label class="size-option">
+                  <input
+                    type="radio"
+                    name="size-espresso"
+                    value="Medium"
+                    data-price="120"
+                  />
+                  <span>
+                    <div class="size-label">Medium</div>
+                    <div class="size-desc">4 oz</div>
+                  </span>
+                </label>
+                <label class="size-option">
+                  <input
+                    type="radio"
+                    name="size-espresso"
+                    value="Large"
+                    data-price="140"
+                  />
+                  <span>
+                    <div class="size-label">Large</div>
+                    <div class="size-desc">6 oz</div>
+                  </span>
+                </label>
+              </div>
+
               <div class="product-footer">
-                <span class="product-price">₱120</span>
+                <span class="product-price">₱<span class="price-value">100</span></span>
                 <div class="quantity-controls">
-                  <button class="qty-btn minus">−</button>
+                  <button class="qty-btn" onclick="decreaseQty(this)">−</button>
                   <input
                     type="number"
                     class="qty-input"
@@ -130,43 +231,84 @@
                     min="1"
                     readonly
                   />
-                  <button class="qty-btn plus">+</button>
+                  <button class="qty-btn" onclick="increaseQty(this)">+</button>
                 </div>
               </div>
+              <button class="btn btn-primary btn-full add-to-cart">
+                Add to Cart
+              </button>
             </div>
           </div>
 
-          <div
-            class="product-card"
-            data-category="coffee"
-            data-item="Latte"
-            data-price="170"
-            data-options="hot,cold"
-          >
+          <div class="product-card" data-category="coffee">
             <div class="product-image">
               <img
                 src="https://plus.unsplash.com/premium_photo-1671718611934-06f5c1a523c2?q=80&w=687&auto=format&fit=crop"
                 alt="Latte"
               />
-              <span class="product-badge">Hot/Cold</span>
+              <span class="product-badge">Bestseller</span>
             </div>
             <div class="product-content">
               <h3 class="product-name">Latte</h3>
-              <p class="product-description">Smooth and creamy milk coffee</p>
+              <p class="product-description">
+                Smooth and creamy espresso with steamed milk
+              </p>
+
               <div class="temperature-options">
                 <label class="temp-option">
-                  <input type="radio" name="latte-temp" value="hot" checked />
-                  <span>Hot</span>
+                  <input type="radio" name="temp-latte" value="Hot" checked />
+                  <span>☕ Hot</span>
                 </label>
                 <label class="temp-option">
-                  <input type="radio" name="latte-temp" value="cold" />
-                  <span>Cold</span>
+                  <input type="radio" name="temp-latte" value="Iced" />
+                  <span>🧊 Iced</span>
                 </label>
               </div>
+
+              <div class="size-options">
+                <label class="size-option">
+                  <input
+                    type="radio"
+                    name="size-latte"
+                    value="Small"
+                    data-price="150"
+                    checked
+                  />
+                  <span>
+                    <div class="size-label">Small</div>
+                    <div class="size-desc">8 oz</div>
+                  </span>
+                </label>
+                <label class="size-option">
+                  <input
+                    type="radio"
+                    name="size-latte"
+                    value="Medium"
+                    data-price="170"
+                  />
+                  <span>
+                    <div class="size-label">Medium</div>
+                    <div class="size-desc">12 oz</div>
+                  </span>
+                </label>
+                <label class="size-option">
+                  <input
+                    type="radio"
+                    name="size-latte"
+                    value="Large"
+                    data-price="190"
+                  />
+                  <span>
+                    <div class="size-label">Large</div>
+                    <div class="size-desc">16 oz</div>
+                  </span>
+                </label>
+              </div>
+
               <div class="product-footer">
-                <span class="product-price">₱170</span>
+                <span class="product-price">₱<span class="price-value">150</span></span>
                 <div class="quantity-controls">
-                  <button class="qty-btn minus">−</button>
+                  <button class="qty-btn" onclick="decreaseQty(this)">−</button>
                   <input
                     type="number"
                     class="qty-input"
@@ -174,48 +316,88 @@
                     min="1"
                     readonly
                   />
-                  <button class="qty-btn plus">+</button>
+                  <button class="qty-btn" onclick="increaseQty(this)">+</button>
                 </div>
               </div>
+              <button class="btn btn-primary btn-full add-to-cart">
+                Add to Cart
+              </button>
             </div>
           </div>
 
-          <div
-            class="product-card"
-            data-category="coffee"
-            data-item="Americano"
-            data-price="140"
-            data-options="hot,cold"
-          >
+          <div class="product-card" data-category="coffee">
             <div class="product-image">
               <img
                 src="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?q=80&w=687&auto=format&fit=crop"
                 alt="Americano"
               />
-              <span class="product-badge">Hot/Cold</span>
             </div>
             <div class="product-content">
               <h3 class="product-name">Americano</h3>
-              <p class="product-description">Bold espresso with hot water</p>
+              <p class="product-description">
+                Bold espresso diluted with hot water
+              </p>
+
               <div class="temperature-options">
                 <label class="temp-option">
                   <input
                     type="radio"
-                    name="americano-temp"
-                    value="hot"
+                    name="temp-americano"
+                    value="Hot"
                     checked
                   />
-                  <span>Hot</span>
+                  <span>☕ Hot</span>
                 </label>
                 <label class="temp-option">
-                  <input type="radio" name="americano-temp" value="cold" />
-                  <span>Cold</span>
+                  <input type="radio" name="temp-americano" value="Iced" />
+                  <span>🧊 Iced</span>
                 </label>
               </div>
+
+              <div class="size-options">
+                <label class="size-option">
+                  <input
+                    type="radio"
+                    name="size-americano"
+                    value="Small"
+                    data-price="120"
+                    checked
+                  />
+                  <span>
+                    <div class="size-label">Small</div>
+                    <div class="size-desc">8 oz</div>
+                  </span>
+                </label>
+                <label class="size-option">
+                  <input
+                    type="radio"
+                    name="size-americano"
+                    value="Medium"
+                    data-price="140"
+                  />
+                  <span>
+                    <div class="size-label">Medium</div>
+                    <div class="size-desc">12 oz</div>
+                  </span>
+                </label>
+                <label class="size-option">
+                  <input
+                    type="radio"
+                    name="size-americano"
+                    value="Large"
+                    data-price="160"
+                  />
+                  <span>
+                    <div class="size-label">Large</div>
+                    <div class="size-desc">16 oz</div>
+                  </span>
+                </label>
+              </div>
+
               <div class="product-footer">
-                <span class="product-price">₱140</span>
+                <span class="product-price">₱<span class="price-value">120</span></span>
                 <div class="quantity-controls">
-                  <button class="qty-btn minus">−</button>
+                  <button class="qty-btn" onclick="decreaseQty(this)">−</button>
                   <input
                     type="number"
                     class="qty-input"
@@ -223,139 +405,62 @@
                     min="1"
                     readonly
                   />
-                  <button class="qty-btn plus">+</button>
+                  <button class="qty-btn" onclick="increaseQty(this)">+</button>
                 </div>
               </div>
+              <button class="btn btn-primary btn-full add-to-cart">
+                Add to Cart
+              </button>
             </div>
           </div>
 
           <!-- Pastry Items -->
-          <div
-            class="product-card"
-            data-category="pastries"
-            data-item="Chocolate Chip Cookie"
-            data-price="80"
-          >
-            <div class="product-image">
-              <img
-                src="https://plus.unsplash.com/premium_photo-1668164007727-9f8fc97df4f6?q=80&w=687&auto=format&fit=crop"
-                alt="Chocolate Chip Cookie"
-              />
-              <span class="product-badge">Fresh Baked</span>
-            </div>
-            <div class="product-content">
-              <h3 class="product-name">Chocolate Chip Cookie</h3>
-              <p class="product-description">
-                Fresh baked cookie with chocolate chips
-              </p>
-              <div class="product-footer">
-                <span class="product-price">₱80</span>
-                <div class="quantity-controls">
-                  <button class="qty-btn minus">−</button>
-                  <input
-                    type="number"
-                    class="qty-input"
-                    value="1"
-                    min="1"
-                    readonly
-                  />
-                  <button class="qty-btn plus">+</button>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div
-            class="product-card"
-            data-category="pastries"
-            data-item="Croissant"
-            data-price="95"
-          >
-            <div class="product-image">
-              <img
-                src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?q=80&w=687&auto=format&fit=crop"
-                alt="Croissant"
-              />
-              <span class="product-badge">Buttery</span>
-            </div>
-            <div class="product-content">
-              <h3 class="product-name">Croissant</h3>
-              <p class="product-description">Buttery, flaky French pastry</p>
-              <div class="product-footer">
-                <span class="product-price">₱95</span>
-                <div class="quantity-controls">
-                  <button class="qty-btn minus">−</button>
-                  <input
-                    type="number"
-                    class="qty-input"
-                    value="1"
-                    min="1"
-                    readonly
-                  />
-                  <button class="qty-btn plus">+</button>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div
-            class="product-card"
-            data-category="pastries"
-            data-item="Blueberry Muffin"
-            data-price="110"
-          >
-            <div class="product-image">
-              <img
-                src="https://images.unsplash.com/photo-1607958996333-41aef7caefaa?q=80&w=687&auto=format&fit=crop"
-                alt="Blueberry Muffin"
-              />
-              <span class="product-badge">Fresh</span>
-            </div>
-            <div class="product-content">
-              <h3 class="product-name">Blueberry Muffin</h3>
-              <p class="product-description">
-                Soft muffin with fresh blueberries
-              </p>
-              <div class="product-footer">
-                <span class="product-price">₱110</span>
-                <div class="quantity-controls">
-                  <button class="qty-btn minus">−</button>
-                  <input
-                    type="number"
-                    class="qty-input"
-                    value="1"
-                    min="1"
-                    readonly
-                  />
-                  <button class="qty-btn plus">+</button>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Cake Items -->
-          <div
-            class="product-card"
-            data-category="cakes"
-            data-item="Chocolate Cake"
-            data-price="250"
-          >
+          <div class="product-card" data-category="pastry">
             <div class="product-image">
               <img
                 src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?q=80&w=689&auto=format&fit=crop"
                 alt="Chocolate Cake"
               />
-              <span class="product-badge">Premium</span>
+              <span class="product-badge">New</span>
             </div>
             <div class="product-content">
               <h3 class="product-name">Chocolate Cake</h3>
               <p class="product-description">
-                Rich chocolate cake with ganache
+                Rich, moist chocolate cake with creamy frosting
               </p>
+
+              <div class="size-options">
+                <label class="size-option">
+                  <input
+                    type="radio"
+                    name="size-chocolate-cake"
+                    value="2 Slices"
+                    data-price="180"
+                    checked
+                  />
+                  <span>
+                    <div class="size-label">2 Slices</div>
+                    <div class="size-desc">Perfect for sharing</div>
+                  </span>
+                </label>
+                <label class="size-option">
+                  <input
+                    type="radio"
+                    name="size-chocolate-cake"
+                    value="Whole Cake"
+                    data-price="850"
+                  />
+                  <span>
+                    <div class="size-label">Whole Cake</div>
+                    <div class="size-desc">8-10 servings</div>
+                  </span>
+                </label>
+              </div>
+
               <div class="product-footer">
-                <span class="product-price">₱250</span>
+                <span class="product-price">₱<span class="price-value">180</span></span>
                 <div class="quantity-controls">
-                  <button class="qty-btn minus">−</button>
+                  <button class="qty-btn" onclick="decreaseQty(this)">−</button>
                   <input
                     type="number"
                     class="qty-input"
@@ -363,104 +468,122 @@
                     min="1"
                     readonly
                   />
-                  <button class="qty-btn plus">+</button>
+                  <button class="qty-btn" onclick="increaseQty(this)">+</button>
                 </div>
               </div>
+              <button class="btn btn-primary btn-full add-to-cart">
+                Add to Cart
+              </button>
             </div>
           </div>
 
-          <div
-            class="product-card"
-            data-category="cakes"
-            data-item="Red Velvet Cake"
-            data-price="280"
-          >
-            <div class="product-image">
-              <img
-                src="https://images.unsplash.com/photo-1586985289688-ca3cf47d3e6e?q=80&w=687&auto=format&fit=crop"
-                alt="Red Velvet Cake"
-              />
-              <span class="product-badge">Premium</span>
-            </div>
-            <div class="product-content">
-              <h3 class="product-name">Red Velvet Cake</h3>
-              <p class="product-description">
-                Classic red velvet with cream cheese frosting
-              </p>
-              <div class="product-footer">
-                <span class="product-price">₱280</span>
-                <div class="quantity-controls">
-                  <button class="qty-btn minus">−</button>
-                  <input
-                    type="number"
-                    class="qty-input"
-                    value="1"
-                    min="1"
-                    readonly
-                  />
-                  <button class="qty-btn plus">+</button>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div
-            class="product-card"
-            data-category="cakes"
-            data-item="Cheesecake"
-            data-price="300"
-          >
-            <div class="product-image">
-              <img
-                src="https://images.unsplash.com/photo-1524351199678-941a58a3df50?q=80&w=687&auto=format&fit=crop"
-                alt="Cheesecake"
-              />
-              <span class="product-badge">Premium</span>
-            </div>
-            <div class="product-content">
-              <h3 class="product-name">Cheesecake</h3>
-              <p class="product-description">
-                Creamy New York-style cheesecake
-              </p>
-              <div class="product-footer">
-                <span class="product-price">₱300</span>
-                <div class="quantity-controls">
-                  <button class="qty-btn minus">−</button>
-                  <input
-                    type="number"
-                    class="qty-input"
-                    value="1"
-                    min="1"
-                    readonly
-                  />
-                  <button class="qty-btn plus">+</button>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div
-            class="product-card"
-            data-category="cakes"
-            data-item="Carrot Cake"
-            data-price="260"
-          >
+          <div class="product-card" data-category="pastry">
             <div class="product-image">
               <img
                 src="https://images.unsplash.com/photo-1621303837174-89787a7d4729?q=80&w=736&auto=format&fit=crop"
+                alt="Blueberry Cheesecake"
+              />
+            </div>
+            <div class="product-content">
+              <h3 class="product-name">Blueberry Cheesecake</h3>
+              <p class="product-description">
+                Creamy cheesecake topped with fresh blueberries
+              </p>
+
+              <div class="size-options">
+                <label class="size-option">
+                  <input
+                    type="radio"
+                    name="size-blueberry-cheesecake"
+                    value="2 Slices"
+                    data-price="200"
+                    checked
+                  />
+                  <span>
+                    <div class="size-label">2 Slices</div>
+                    <div class="size-desc">Perfect for sharing</div>
+                  </span>
+                </label>
+                <label class="size-option">
+                  <input
+                    type="radio"
+                    name="size-blueberry-cheesecake"
+                    value="Whole Cake"
+                    data-price="950"
+                  />
+                  <span>
+                    <div class="size-label">Whole Cake</div>
+                    <div class="size-desc">8-10 servings</div>
+                  </span>
+                </label>
+              </div>
+
+              <div class="product-footer">
+                <span class="product-price">₱<span class="price-value">200</span></span>
+                <div class="quantity-controls">
+                  <button class="qty-btn" onclick="decreaseQty(this)">−</button>
+                  <input
+                    type="number"
+                    class="qty-input"
+                    value="1"
+                    min="1"
+                    readonly
+                  />
+                  <button class="qty-btn" onclick="increaseQty(this)">+</button>
+                </div>
+              </div>
+              <button class="btn btn-primary btn-full add-to-cart">
+                Add to Cart
+              </button>
+            </div>
+          </div>
+
+          <div class="product-card" data-category="pastry">
+            <div class="product-image">
+              <img
+                src="https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?q=80&w=736&auto=format&fit=crop"
                 alt="Carrot Cake"
               />
-              <span class="product-badge">Premium</span>
+              <span class="product-badge">Popular</span>
             </div>
             <div class="product-content">
               <h3 class="product-name">Carrot Cake</h3>
               <p class="product-description">
-                Moist carrot cake with cream cheese icing
+                Spiced carrot cake with cream cheese frosting
               </p>
+
+              <div class="size-options">
+                <label class="size-option">
+                  <input
+                    type="radio"
+                    name="size-carrot-cake"
+                    value="2 Slices"
+                    data-price="190"
+                    checked
+                  />
+                  <span>
+                    <div class="size-label">2 Slices</div>
+                    <div class="size-desc">Perfect for sharing</div>
+                  </span>
+                </label>
+                <label class="size-option">
+                  <input
+                    type="radio"
+                    name="size-carrot-cake"
+                    value="Whole Cake"
+                    data-price="900"
+                  />
+                  <span>
+                    <div class="size-label">Whole Cake</div>
+                    <div class="size-desc">8-10 servings</div>
+                  </span>
+                </label>
+              </div>
+
               <div class="product-footer">
-                <span class="product-price">₱260</span>
+                <span class="product-price">₱<span class="price-value">190</span></span>
                 <div class="quantity-controls">
-                  <button class="qty-btn minus">−</button>
+                  <button class="qty-btn" onclick="decreaseQty(this)">−</button>
                   <input
                     type="number"
                     class="qty-input"
@@ -468,14 +591,61 @@
                     min="1"
                     readonly
                   />
-                  <button class="qty-btn plus">+</button>
+                  <button class="qty-btn" onclick="increaseQty(this)">+</button>
                 </div>
               </div>
+              <button class="btn btn-primary btn-full add-to-cart">
+                Add to Cart
+              </button>
             </div>
           </div>
         </div>
       </div>
     </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-grid">
+          <div class="footer-col">
+            <div class="footer-logo">
+              <span class="logo-icon">☕</span>
+              <span class="logo-text">JLJM Timeless Cup</span>
+            </div>
+            <p>Where every sip tells a timeless story.</p>
+          </div>
+          <div class="footer-col">
+            <h4>Quick Links</h4>
+            <ul>
+              <li><a href="index.html">Home</a></li>
+              <li><a href="index.html#about">About</a></li>
+              <li><a href="index.html#menu">Menu</a></li>
+              <li><a href="dashboard.html">Order Now</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>Contact Us</h4>
+            <ul>
+              <li>escxrio@gmail.com</li>
+              <li>+63 967 408 1628</li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>Visit Us</h4>
+            <ul>
+              <li>Location: Las Piñas City, Philippines</li>
+              <h4>Hours</h4>
+              <li>Mon - Fri: 7am - 10pm</li>
+              <li>Sat - Sun: 8am - 8pm</li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>Group: Jan Escario, Leo Dimata, Jeric Diringan, Mark Conogana</p>
+          <p>© 01/26/2026 JLJM Timeless Cup. All Rights Reserved.</p>
+        </div>
+      </div>
+    </footer>
 
     <!-- Cart Modal -->
     <div id="cartModal" class="modal">
@@ -495,15 +665,60 @@
       </div>
     </div>
 
-    <!-- Footer -->
-    <footer class="footer">
-      <div class="container">
-        <div class="footer-bottom">
-          <p>Group: Jan Escario, Leo Dimata, Jeric Diringan, Mark Conogana</p>
-          <p>© 01/26/2026 JLJM Timeless Cup. All Rights Reserved.</p>
+    <!-- Checkout Modal -->
+    <div id="checkoutModal" class="modal">
+      <div class="modal-content">
+        <span class="close" id="closeCheckout">&times;</span>
+        <h2>Checkout</h2>
+        
+        <div class="checkout-section">
+          <h3>Order Summary</h3>
+          <div id="checkoutItems" class="checkout-items"></div>
+          <div class="checkout-total">
+            <span>Total Amount:</span>
+            <span class="total-price">₱<span id="checkoutTotal">0</span></span>
+          </div>
         </div>
+
+        <div class="checkout-section">
+          <h3>Payment Method</h3>
+          <div class="payment-methods">
+            <label class="payment-option">
+              <input type="radio" name="payment" value="Cash" checked />
+              <span class="payment-card">
+                <span class="payment-icon">💵</span>
+                <span class="payment-label">Cash</span>
+              </span>
+            </label>
+            <label class="payment-option">
+              <input type="radio" name="payment" value="GCash" />
+              <span class="payment-card">
+                <span class="payment-icon">📱</span>
+                <span class="payment-label">GCash</span>
+              </span>
+            </label>
+            <label class="payment-option">
+              <input type="radio" name="payment" value="Credit Card" />
+              <span class="payment-card">
+                <span class="payment-icon">💳</span>
+                <span class="payment-label">Credit Card</span>
+              </span>
+            </label>
+            <label class="payment-option">
+              <input type="radio" name="payment" value="Debit Card" />
+              <span class="payment-card">
+                <span class="payment-icon">💳</span>
+                <span class="payment-label">Debit Card</span>
+              </span>
+            </label>
+          </div>
+        </div>
+
+        <button class="btn btn-primary btn-full" id="confirmOrderBtn">
+          Confirm Order
+        </button>
       </div>
-    </footer>
+    </div>
 
     <script src="main.js"></script>
   </body>
