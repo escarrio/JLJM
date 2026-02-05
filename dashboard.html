@@ -414,6 +414,180 @@
             </div>
           </div>
 
+          <div class="product-card" data-category="coffee">
+            <div class="product-image">
+              <img
+                src="https://images.unsplash.com/photo-1517487881594-2787fef5ebf7?q=80&w=735&auto=format&fit=crop"
+                alt="Mocha"
+              />
+              <span class="product-badge">Sweet</span>
+            </div>
+            <div class="product-content">
+              <h3 class="product-name">Mocha</h3>
+              <p class="product-description">
+                Rich espresso with chocolate and steamed milk
+              </p>
+
+              <div class="temperature-options">
+                <label class="temp-option">
+                  <input type="radio" name="temp-mocha" value="Hot" checked />
+                  <span>☕ Hot</span>
+                </label>
+                <label class="temp-option">
+                  <input type="radio" name="temp-mocha" value="Iced" />
+                  <span>🧊 Iced</span>
+                </label>
+              </div>
+
+              <div class="size-options">
+                <label class="size-option">
+                  <input
+                    type="radio"
+                    name="size-mocha"
+                    value="Small"
+                    data-price="160"
+                    checked
+                  />
+                  <span>
+                    <div class="size-label">Small</div>
+                    <div class="size-desc">8 oz</div>
+                  </span>
+                </label>
+                <label class="size-option">
+                  <input
+                    type="radio"
+                    name="size-mocha"
+                    value="Medium"
+                    data-price="180"
+                  />
+                  <span>
+                    <div class="size-label">Medium</div>
+                    <div class="size-desc">12 oz</div>
+                  </span>
+                </label>
+                <label class="size-option">
+                  <input
+                    type="radio"
+                    name="size-mocha"
+                    value="Large"
+                    data-price="200"
+                  />
+                  <span>
+                    <div class="size-label">Large</div>
+                    <div class="size-desc">16 oz</div>
+                  </span>
+                </label>
+              </div>
+
+              <div class="product-footer">
+                <span class="product-price">₱<span class="price-value">160</span></span>
+                <div class="quantity-controls">
+                  <button class="qty-btn" onclick="decreaseQty(this)">−</button>
+                  <input
+                    type="number"
+                    class="qty-input"
+                    value="1"
+                    min="1"
+                    readonly
+                  />
+                  <button class="qty-btn" onclick="increaseQty(this)">+</button>
+                </div>
+              </div>
+              <button class="btn btn-primary btn-full add-to-cart">
+                Add to Cart
+              </button>
+            </div>
+          </div>
+
+          <div class="product-card" data-category="coffee">
+            <div class="product-image">
+              <img
+                src="https://images.unsplash.com/photo-1461023058943-07fcbe16d735?q=80&w=1169&auto=format&fit=crop"
+                alt="Caramel Macchiato"
+              />
+            </div>
+            <div class="product-content">
+              <h3 class="product-name">Caramel Macchiato</h3>
+              <p class="product-description">
+                Espresso with vanilla and sweet caramel drizzle
+              </p>
+
+              <div class="temperature-options">
+                <label class="temp-option">
+                  <input
+                    type="radio"
+                    name="temp-caramel"
+                    value="Hot"
+                    checked
+                  />
+                  <span>☕ Hot</span>
+                </label>
+                <label class="temp-option">
+                  <input type="radio" name="temp-caramel" value="Iced" />
+                  <span>🧊 Iced</span>
+                </label>
+              </div>
+
+              <div class="size-options">
+                <label class="size-option">
+                  <input
+                    type="radio"
+                    name="size-caramel"
+                    value="Small"
+                    data-price="170"
+                    checked
+                  />
+                  <span>
+                    <div class="size-label">Small</div>
+                    <div class="size-desc">8 oz</div>
+                  </span>
+                </label>
+                <label class="size-option">
+                  <input
+                    type="radio"
+                    name="size-caramel"
+                    value="Medium"
+                    data-price="190"
+                  />
+                  <span>
+                    <div class="size-label">Medium</div>
+                    <div class="size-desc">12 oz</div>
+                  </span>
+                </label>
+                <label class="size-option">
+                  <input
+                    type="radio"
+                    name="size-caramel"
+                    value="Large"
+                    data-price="210"
+                  />
+                  <span>
+                    <div class="size-label">Large</div>
+                    <div class="size-desc">16 oz</div>
+                  </span>
+                </label>
+              </div>
+
+              <div class="product-footer">
+                <span class="product-price">₱<span class="price-value">170</span></span>
+                <div class="quantity-controls">
+                  <button class="qty-btn" onclick="decreaseQty(this)">−</button>
+                  <input
+                    type="number"
+                    class="qty-input"
+                    value="1"
+                    min="1"
+                    readonly
+                  />
+                  <button class="qty-btn" onclick="increaseQty(this)">+</button>
+                </div>
+              </div>
+              <button class="btn btn-primary btn-full add-to-cart">
+                Add to Cart
+              </button>
+            </div>
+          </div>
+
           <!-- Pastry Items -->
           <div class="product-card" data-category="pastry">
             <div class="product-image">
@@ -582,6 +756,191 @@
 
               <div class="product-footer">
                 <span class="product-price">₱<span class="price-value">190</span></span>
+                <div class="quantity-controls">
+                  <button class="qty-btn" onclick="decreaseQty(this)">−</button>
+                  <input
+                    type="number"
+                    class="qty-input"
+                    value="1"
+                    min="1"
+                    readonly
+                  />
+                  <button class="qty-btn" onclick="increaseQty(this)">+</button>
+                </div>
+              </div>
+              <button class="btn btn-primary btn-full add-to-cart">
+                Add to Cart
+              </button>
+            </div>
+          </div>
+
+          <div class="product-card" data-category="pastry">
+            <div class="product-image">
+              <img
+                src="https://images.unsplash.com/photo-1586985289688-ca3cf47d3e6e?q=80&w=687&auto=format&fit=crop"
+                alt="Red Velvet Cake"
+              />
+            </div>
+            <div class="product-content">
+              <h3 class="product-name">Red Velvet Cake</h3>
+              <p class="product-description">
+                Velvety red cake with cream cheese frosting
+              </p>
+
+              <div class="size-options">
+                <label class="size-option">
+                  <input
+                    type="radio"
+                    name="size-red-velvet"
+                    value="2 Slices"
+                    data-price="200"
+                    checked
+                  />
+                  <span>
+                    <div class="size-label">2 Slices</div>
+                    <div class="size-desc">Perfect for sharing</div>
+                  </span>
+                </label>
+                <label class="size-option">
+                  <input
+                    type="radio"
+                    name="size-red-velvet"
+                    value="Whole Cake"
+                    data-price="950"
+                  />
+                  <span>
+                    <div class="size-label">Whole Cake</div>
+                    <div class="size-desc">8-10 servings</div>
+                  </span>
+                </label>
+              </div>
+
+              <div class="product-footer">
+                <span class="product-price">₱<span class="price-value">200</span></span>
+                <div class="quantity-controls">
+                  <button class="qty-btn" onclick="decreaseQty(this)">−</button>
+                  <input
+                    type="number"
+                    class="qty-input"
+                    value="1"
+                    min="1"
+                    readonly
+                  />
+                  <button class="qty-btn" onclick="increaseQty(this)">+</button>
+                </div>
+              </div>
+              <button class="btn btn-primary btn-full add-to-cart">
+                Add to Cart
+              </button>
+            </div>
+          </div>
+
+          <div class="product-card" data-category="pastry">
+            <div class="product-image">
+              <img
+                src="https://images.unsplash.com/photo-1565958011703-44f9829ba187?q=80&w=765&auto=format&fit=crop"
+                alt="Strawberry Shortcake"
+              />
+              <span class="product-badge">Fresh</span>
+            </div>
+            <div class="product-content">
+              <h3 class="product-name">Strawberry Shortcake</h3>
+              <p class="product-description">
+                Light sponge cake with fresh strawberries and cream
+              </p>
+
+              <div class="size-options">
+                <label class="size-option">
+                  <input
+                    type="radio"
+                    name="size-strawberry"
+                    value="2 Slices"
+                    data-price="210"
+                    checked
+                  />
+                  <span>
+                    <div class="size-label">2 Slices</div>
+                    <div class="size-desc">Perfect for sharing</div>
+                  </span>
+                </label>
+                <label class="size-option">
+                  <input
+                    type="radio"
+                    name="size-strawberry"
+                    value="Whole Cake"
+                    data-price="1000"
+                  />
+                  <span>
+                    <div class="size-label">Whole Cake</div>
+                    <div class="size-desc">8-10 servings</div>
+                  </span>
+                </label>
+              </div>
+
+              <div class="product-footer">
+                <span class="product-price">₱<span class="price-value">210</span></span>
+                <div class="quantity-controls">
+                  <button class="qty-btn" onclick="decreaseQty(this)">−</button>
+                  <input
+                    type="number"
+                    class="qty-input"
+                    value="1"
+                    min="1"
+                    readonly
+                  />
+                  <button class="qty-btn" onclick="increaseQty(this)">+</button>
+                </div>
+              </div>
+              <button class="btn btn-primary btn-full add-to-cart">
+                Add to Cart
+              </button>
+            </div>
+          </div>
+
+          <div class="product-card" data-category="pastry">
+            <div class="product-image">
+              <img
+                src="https://images.unsplash.com/photo-1631206443660-91c76a774def?q=80&w=687&auto=format&fit=crop"
+                alt="Tiramisu"
+              />
+              <span class="product-badge">Classic</span>
+            </div>
+            <div class="product-content">
+              <h3 class="product-name">Tiramisu</h3>
+              <p class="product-description">
+                Italian coffee-flavored layered dessert
+              </p>
+
+              <div class="size-options">
+                <label class="size-option">
+                  <input
+                    type="radio"
+                    name="size-tiramisu"
+                    value="2 Slices"
+                    data-price="220"
+                    checked
+                  />
+                  <span>
+                    <div class="size-label">2 Slices</div>
+                    <div class="size-desc">Perfect for sharing</div>
+                  </span>
+                </label>
+                <label class="size-option">
+                  <input
+                    type="radio"
+                    name="size-tiramisu"
+                    value="Whole Cake"
+                    data-price="1050"
+                  />
+                  <span>
+                    <div class="size-label">Whole Cake</div>
+                    <div class="size-desc">8-10 servings</div>
+                  </span>
+                </label>
+              </div>
+
+              <div class="product-footer">
+                <span class="product-price">₱<span class="price-value">220</span></span>
                 <div class="quantity-controls">
                   <button class="qty-btn" onclick="decreaseQty(this)">−</button>
                   <input
