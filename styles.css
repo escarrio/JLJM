@@ -1066,7 +1066,7 @@ body {
   font-size: 18px;
 }
 
-.remove-btn {
+.cart-remove-btn {
   background: transparent;
   color: var(--medium-brown);
   border: none;
@@ -1079,7 +1079,7 @@ body {
   font-family: 'Montserrat', sans-serif;
 }
 
-.remove-btn:hover {
+.cart-remove-btn:hover {
   color: var(--dark-brown);
   text-decoration: none;
 }
