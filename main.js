@@ -63,72 +63,75 @@ document.addEventListener("DOMContentLoaded", () => {
       priceDisplay.textContent = newPrice;
     });
   });
-});
 
-// ==================== CATEGORY FILTER ====================
-const filterBtns = document.querySelectorAll(".filter-btn");
-const productCards = document.querySelectorAll(".product-card");
+  // ==================== ADD TO CART ====================
+  document.querySelectorAll(".add-to-cart").forEach((btn) => {
+    btn.addEventListener("click", (e) => {
+      const productCard = e.target.closest(".product-card");
+      const name = productCard.querySelector(".product-name").textContent;
+      const priceValue = productCard.querySelector(".price-value").textContent;
+      const price = parseFloat(priceValue);
+      const quantity = parseInt(productCard.querySelector(".qty-input").value);
 
-if (filterBtns.length > 0) {
-  filterBtns.forEach((btn) => {
-    btn.addEventListener("click", () => {
-      const category = btn.getAttribute("data-category");
+      // Get temperature (if available)
+      const tempRadio = productCard.querySelector('input[type="radio"][name^="temp-"]:checked');
+      const temperature = tempRadio ? tempRadio.value : null;
 
-      // Update active button
-      filterBtns.forEach((b) => b.classList.remove("active"));
-      btn.classList.add("active");
+      // Get size or slice selection
+      const sizeRadio = productCard.querySelector('input[type="radio"][name^="size-"]:checked');
+      const size = sizeRadio ? sizeRadio.value : null;
 
-      // Filter products
-      productCards.forEach((card) => {
-        if (category === "all" || card.getAttribute("data-category") === category) {
-          card.style.display = "block";
-        } else {
-          card.style.display = "none";
-        }
-      });
+      // Create unique item identifier
+      const itemId = `${name}-${temperature || 'none'}-${size || 'none'}`;
+
+      // Check if item already exists in cart
+      const existingItem = cart.find((item) => item.id === itemId);
+
+      if (existingItem) {
+        existingItem.quantity += quantity;
+      } else {
+        cart.push({
+          id: itemId,
+          name: name,
+          price: price,
+          quantity: quantity,
+          temperature: temperature,
+          size: size,
+        });
+      }
+
+      updateCart();
+      showNotification(`${name} added to cart!`);
+      
+      // Reset quantity to 1 after adding
+      productCard.querySelector(".qty-input").value = 1;
     });
   });
-}
 
-// ==================== ADD TO CART ====================
-document.querySelectorAll(".add-to-cart").forEach((btn) => {
-  btn.addEventListener("click", (e) => {
-    const productCard = e.target.closest(".product-card");
-    const name = productCard.querySelector(".product-name").textContent;
-    const priceValue = productCard.querySelector(".price-value").textContent;
-    const price = parseFloat(priceValue);
-    const quantity = parseInt(productCard.querySelector(".qty-input").value);
+  // ==================== CATEGORY FILTER ====================
+  const filterBtns = document.querySelectorAll(".filter-btn");
+  const productCards = document.querySelectorAll(".product-card");
 
-    // Get temperature (if available)
-    const tempRadio = productCard.querySelector('input[type="radio"][name^="temp-"]:checked');
-    const temperature = tempRadio ? tempRadio.value : null;
+  if (filterBtns.length > 0) {
+    filterBtns.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const category = btn.getAttribute("data-category");
 
-    // Get size or slice selection
-    const sizeRadio = productCard.querySelector('input[type="radio"][name^="size-"]:checked');
-    const size = sizeRadio ? sizeRadio.value : null;
+        // Update active button
+        filterBtns.forEach((b) => b.classList.remove("active"));
+        btn.classList.add("active");
 
-    // Create unique item identifier
-    const itemId = `${name}-${temperature || 'none'}-${size || 'none'}`;
-
-    // Check if item already exists in cart
-    const existingItem = cart.find((item) => item.id === itemId);
-
-    if (existingItem) {
-      existingItem.quantity += quantity;
-    } else {
-      cart.push({
-        id: itemId,
-        name: name,
-        price: price,
-        quantity: quantity,
-        temperature: temperature,
-        size: size,
+        // Filter products
+        productCards.forEach((card) => {
+          if (category === "all" || card.getAttribute("data-category") === category) {
+            card.style.display = "block";
+          } else {
+            card.style.display = "none";
+          }
+        });
       });
-    }
-
-    updateCart();
-    showNotification(`${name} added to cart!`);
-  });
+    });
+  }
 });
 
 // ==================== UPDATE CART ====================
