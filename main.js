@@ -52,15 +52,86 @@ function decreaseQty(button) {
   }
 }
 
-// ==================== SIZE/SLICE SELECTION WITH PRICE UPDATE ====================
+// ==================== SLICE INPUT CONTROLS ====================
+function increaseSlices(button) {
+  const input = button.parentElement.querySelector(".slice-number-input");
+  const max = parseInt(input.getAttribute("max")) || 10;
+  if (parseInt(input.value) < max) {
+    input.value = parseInt(input.value) + 1;
+    updateCakePrice(input);
+  }
+}
+
+function decreaseSlices(button) {
+  const input = button.parentElement.querySelector(".slice-number-input");
+  if (parseInt(input.value) > 1) {
+    input.value = parseInt(input.value) - 1;
+    updateCakePrice(input);
+  }
+}
+
+function updateCakePrice(input) {
+  const productCard = input.closest(".product-card");
+  const priceDisplay = productCard.querySelector(".price-value");
+  const wholeCakeCheckbox = productCard.querySelector(".whole-cake-checkbox");
+  
+  if (wholeCakeCheckbox && wholeCakeCheckbox.checked) {
+    return; // Price is already set to whole cake price
+  }
+  
+  const pricePerSlice = parseFloat(input.getAttribute("data-price-per-slice"));
+  const numSlices = parseInt(input.value);
+  const totalPrice = pricePerSlice * numSlices;
+  
+  priceDisplay.textContent = totalPrice;
+}
+
+// ==================== SIZE/FLAVOR/SLICE SELECTION WITH PRICE UPDATE ====================
 document.addEventListener("DOMContentLoaded", () => {
-  // Handle size option changes for coffee and cakes
+  // Handle size option changes for coffee
   document.querySelectorAll(".size-option input[type='radio']").forEach((radio) => {
     radio.addEventListener("change", (e) => {
       const productCard = e.target.closest(".product-card");
       const priceDisplay = productCard.querySelector(".price-value");
       const newPrice = e.target.getAttribute("data-price");
       priceDisplay.textContent = newPrice;
+    });
+  });
+
+  // Handle flavor option changes for pastries
+  document.querySelectorAll(".flavor-option input[type='radio']").forEach((radio) => {
+    radio.addEventListener("change", (e) => {
+      const productCard = e.target.closest(".product-card");
+      const priceDisplay = productCard.querySelector(".price-value");
+      const newPrice = e.target.getAttribute("data-price");
+      priceDisplay.textContent = newPrice;
+    });
+  });
+
+  // Handle slice input changes for cakes
+  document.querySelectorAll(".slice-number-input").forEach((input) => {
+    input.addEventListener("input", (e) => {
+      updateCakePrice(e.target);
+    });
+  });
+
+  // Handle whole cake checkbox for cakes
+  document.querySelectorAll(".whole-cake-checkbox").forEach((checkbox) => {
+    checkbox.addEventListener("change", (e) => {
+      const productCard = e.target.closest(".product-card");
+      const priceDisplay = productCard.querySelector(".price-value");
+      const sliceInput = productCard.querySelector(".slice-number-input");
+      
+      if (e.target.checked) {
+        const wholePrice = e.target.getAttribute("data-whole-price");
+        priceDisplay.textContent = wholePrice;
+        sliceInput.disabled = true;
+        sliceInput.parentElement.style.opacity = "0.5";
+      } else {
+        sliceInput.disabled = false;
+        sliceInput.parentElement.style.opacity = "1";
+        updateCakePrice(sliceInput);
+      }
     });
   });
 
@@ -73,16 +144,34 @@ document.addEventListener("DOMContentLoaded", () => {
       const price = parseFloat(priceValue);
       const quantity = parseInt(productCard.querySelector(".qty-input").value);
 
-      // Get temperature (if available)
+      // Get temperature (if available - for coffee)
       const tempRadio = productCard.querySelector('input[type="radio"][name^="temp-"]:checked');
       const temperature = tempRadio ? tempRadio.value : null;
 
-      // Get size or slice selection
+      // Get size (if available - for coffee)
       const sizeRadio = productCard.querySelector('input[type="radio"][name^="size-"]:checked');
       const size = sizeRadio ? sizeRadio.value : null;
 
+      // Get flavor (if available - for pastries)
+      const flavorRadio = productCard.querySelector('input[type="radio"][name^="flavor-"]:checked');
+      const flavor = flavorRadio ? flavorRadio.value : null;
+
+      // Get slice info (if available - for cakes)
+      const sliceInput = productCard.querySelector('.slice-number-input');
+      const wholeCakeCheckbox = productCard.querySelector('.whole-cake-checkbox');
+      let sliceInfo = null;
+      
+      if (sliceInput) {
+        if (wholeCakeCheckbox && wholeCakeCheckbox.checked) {
+          sliceInfo = "Whole Cake";
+        } else {
+          const numSlices = parseInt(sliceInput.value);
+          sliceInfo = `${numSlices} Slice${numSlices > 1 ? 's' : ''}`;
+        }
+      }
+
       // Create unique item identifier
-      const itemId = `${name}-${temperature || 'none'}-${size || 'none'}`;
+      const itemId = `${name}-${temperature || 'none'}-${size || 'none'}-${flavor || 'none'}-${sliceInfo || 'none'}`;
 
       // Check if item already exists in cart
       const existingItem = cart.find((item) => item.id === itemId);
@@ -97,6 +186,8 @@ document.addEventListener("DOMContentLoaded", () => {
           quantity: quantity,
           temperature: temperature,
           size: size,
+          flavor: flavor,
+          sliceInfo: sliceInfo,
         });
       }
 
@@ -164,6 +255,12 @@ function updateCart() {
     }
     if (item.size) {
       itemDetails += `<div class="cart-item-price">Size: ${item.size}</div>`;
+    }
+    if (item.flavor) {
+      itemDetails += `<div class="cart-item-price">Flavor: ${item.flavor}</div>`;
+    }
+    if (item.sliceInfo) {
+      itemDetails += `<div class="cart-item-price">${item.sliceInfo}</div>`;
     }
 
     cartHTML += `
@@ -270,6 +367,12 @@ function updateCheckoutModal() {
     }
     if (item.size) {
       itemDetails += ` - ${item.size}`;
+    }
+    if (item.flavor) {
+      itemDetails += ` - ${item.flavor}`;
+    }
+    if (item.sliceInfo) {
+      itemDetails += ` - ${item.sliceInfo}`;
     }
 
     checkoutHTML += `
